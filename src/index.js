@@ -1,4 +1,6 @@
-import Button from "./components/Button"
-import TestComponent from "./TestComponent"
+/* common */
+export { default as styleReset } from './common/styleReset';
+export { createScrollbars } from './common/index';
 
-export { Button, TestComponent };
+/* components */
+export { default as Button } from './Button/Button';
