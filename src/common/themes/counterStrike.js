@@ -1,3 +1,5 @@
+// Keep in-sync w/ 'src/components/common/theme.js'
+
 export default {
   name: 'counterStrike',
 
