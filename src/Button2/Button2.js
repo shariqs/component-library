@@ -1,9 +1,8 @@
 /* eslint-disable no-nested-ternary */
 
 import React from 'react';
+import { Button } from 'antd';
 
-const Button2 = () => (
-  <button>Hello Button</button>
-)
-
-export default Button2;
+export const Button2 = ({ primary, backgroundColor, size, label, onClick, ...props }) => {
+  return <Button onClick={onClick}>{label}</Button>;
+};
