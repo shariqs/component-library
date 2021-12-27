@@ -13,8 +13,18 @@ export const StyledButton = styled.button`
   border-radius: 3px;
 `;
 
-const Button = React.forwardRef(function Button() {
-  return <StyledButton>Hello World</StyledButton>;
+const Button = React.forwardRef(function Button(props, ref) {
+  const { onClick, disabled, children, ...otherProps } = props;
+  return (
+    <StyledButton
+      onClick={disabled ? undefined : onClick}
+      disabled={disabled}
+      isDisabled={disabled}
+      ref={ref}
+      {...otherProps}
+    >
+      {children}
+    </StyledButton>)
 });
 
 export default Button;

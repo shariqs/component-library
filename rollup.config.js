@@ -5,6 +5,7 @@ import replace from 'rollup-plugin-replace';
 import copy from 'rollup-plugin-copy';
 import livereload from "rollup-plugin-livereload";
 import packageJson from './package.json';
+import less from 'rollup-plugin-less';
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -32,6 +33,7 @@ export default [
                 runtimeHelpers: true
             }),
             resolve(),
+            less(),
             commonjs(),
             livereload({ watch: "dist/cjs/" })
         ],
@@ -59,6 +61,7 @@ export default [
                 runtimeHelpers: true
             }),
             resolve(),
+            less(),
             commonjs(),
             livereload({ watch: "dist/themes/" })
         ],
