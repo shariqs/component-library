@@ -13,7 +13,7 @@ export const StyledButton = styled.button`
   border-radius: 3px;
 `;
 
-const Button = React.forwardRef(function Button(props, ref) {
+export const Button = React.forwardRef(function Button(props, ref) {
   const { onClick, disabled, children, ...otherProps } = props;
   return (
     <StyledButton
@@ -26,5 +26,3 @@ const Button = React.forwardRef(function Button(props, ref) {
       {children}
     </StyledButton>)
 });
-
-export default Button;
