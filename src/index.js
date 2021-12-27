@@ -4,4 +4,6 @@
 export { default as styleReset } from './common/styleReset';
 
 /* components */
-export * from "./";
+export * from "./Button/Button.js"
+export * from "./Button2/Button2.js"
+export * from "./Button3/Button3.js"
