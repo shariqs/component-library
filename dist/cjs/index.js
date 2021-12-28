@@ -8107,17 +8107,20 @@ var _excluded = ["primary", "backgroundColor", "size", "label", "onClick"];
 var StyledButton = styled__default["default"].button.withConfig({
   displayName: "Button3__StyledButton",
   componentId: "sc-f8zamk-0"
-})(["width:100px;height:100px;font-size:1em;margin:1em;padding:0.25em 1em;border:2px solid palevioletred;border-radius:3px;"]);
+})(["width:100px;height:100px;font-size:1em;margin:1em;padding:0.25em 1em;border:2px solid palevioletred;border-radius:3px;background-color:", ";"], function (props) {
+  return props.backgroundColor || "green";
+});
 var Button3 = function Button3(_ref) {
   _ref.primary;
-      _ref.backgroundColor;
+      var backgroundColor = _ref.backgroundColor;
       _ref.size;
       var label = _ref.label,
       onClick = _ref.onClick;
       _objectWithoutProperties$1(_ref, _excluded);
 
   return /*#__PURE__*/React__default["default"].createElement(StyledButton, {
-    onClick: onClick
+    onClick: onClick,
+    backgroundColor: backgroundColor
   }, label);
 };
 
