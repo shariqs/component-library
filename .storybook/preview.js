@@ -1,5 +1,5 @@
 import 'antd/dist/antd.less'; // Import Ant Design styles by less entry
-import themeLess from '!!raw-loader!../src/theme/theme.less';
+import themeLess from '!!raw-loader!../src/theme/defaultTheme.less';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
