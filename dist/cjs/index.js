@@ -3159,7 +3159,7 @@ function _finishOnFirstFailed() {
   return _finishOnFirstFailed.apply(this, arguments);
 }
 
-var _excluded$6 = ["name"];
+var _excluded$5 = ["name"];
 var EMPTY_ERRORS = [];
 
 function requireUpdate(shouldUpdate, prev, next, prevValue, nextValue, info) {
@@ -3769,7 +3769,7 @@ Field.defaultProps = {
 
 function WrapperField(_ref5) {
   var name = _ref5.name,
-      restProps = _objectWithoutProperties$1(_ref5, _excluded$6);
+      restProps = _objectWithoutProperties$1(_ref5, _excluded$5);
 
   var fieldContext = React__namespace.useContext(Context);
   var namePath = name !== undefined ? getNamePath(name) : undefined;
@@ -4103,7 +4103,7 @@ var NameMap = /*#__PURE__*/function () {
   return NameMap;
 }();
 
-var _excluded$5 = ["name", "errors"];
+var _excluded$4 = ["name", "errors"];
 var FormStore = /*#__PURE__*/_createClass(function FormStore(forceRootUpdate) {
   var _this = this;
 
@@ -4539,7 +4539,7 @@ var FormStore = /*#__PURE__*/_createClass(function FormStore(forceRootUpdate) {
     fields.forEach(function (fieldData) {
       var name = fieldData.name;
           fieldData.errors;
-          var data = _objectWithoutProperties$1(fieldData, _excluded$5);
+          var data = _objectWithoutProperties$1(fieldData, _excluded$4);
 
       var namePath = getNamePath(name); // Value
 
@@ -5032,7 +5032,7 @@ var FormProvider = function FormProvider(_ref) {
   }, children);
 };
 
-var _excluded$4 = ["name", "initialValues", "fields", "form", "preserve", "children", "component", "validateMessages", "validateTrigger", "onValuesChange", "onFieldsChange", "onFinish", "onFinishFailed"];
+var _excluded$3 = ["name", "initialValues", "fields", "form", "preserve", "children", "component", "validateMessages", "validateTrigger", "onValuesChange", "onFieldsChange", "onFinish", "onFinishFailed"];
 
 var Form = function Form(_ref, ref) {
   var name = _ref.name,
@@ -5050,7 +5050,7 @@ var Form = function Form(_ref, ref) {
       _onFieldsChange = _ref.onFieldsChange,
       _onFinish = _ref.onFinish,
       onFinishFailed = _ref.onFinishFailed,
-      restProps = _objectWithoutProperties$1(_ref, _excluded$4);
+      restProps = _objectWithoutProperties$1(_ref, _excluded$3);
 
   var formContext = React__namespace.useContext(FormContext); // We customize handle event since Context will makes all the consumer re-render:
   // https://reactjs.org/docs/context.html#contextprovider
@@ -7217,7 +7217,7 @@ var useInsertStyles = function useInsertStyles() {
   }, []);
 };
 
-var _excluded$3 = ["icon", "className", "onClick", "style", "primaryColor", "secondaryColor"];
+var _excluded$2 = ["icon", "className", "onClick", "style", "primaryColor", "secondaryColor"];
 var twoToneColorPalette = {
   primaryColor: '#333',
   secondaryColor: '#E6E6E6',
@@ -7243,7 +7243,7 @@ var IconBase = function IconBase(props) {
       style = props.style,
       primaryColor = props.primaryColor,
       secondaryColor = props.secondaryColor,
-      restProps = _objectWithoutProperties$1(props, _excluded$3);
+      restProps = _objectWithoutProperties$1(props, _excluded$2);
 
   var colors = twoToneColorPalette;
 
@@ -7307,7 +7307,7 @@ function getTwoToneColor() {
   return [colors.primaryColor, colors.secondaryColor];
 }
 
-var _excluded$2 = ["className", "icon", "spin", "rotate", "tabIndex", "onClick", "twoToneColor"];
+var _excluded$1 = ["className", "icon", "spin", "rotate", "tabIndex", "onClick", "twoToneColor"];
 // should move it to antd main repo?
 
 setTwoToneColor('#1890ff');
@@ -7321,7 +7321,7 @@ var Icon = /*#__PURE__*/React__namespace.forwardRef(function (props, ref) {
       tabIndex = props.tabIndex,
       onClick = props.onClick,
       twoToneColor = props.twoToneColor,
-      restProps = _objectWithoutProperties$1(props, _excluded$2);
+      restProps = _objectWithoutProperties$1(props, _excluded$1);
 
   var _React$useContext = React__namespace.useContext(IconContext$1),
       _React$useContext$pre = _React$useContext.prefixCls,
@@ -7988,7 +7988,7 @@ var Button$2 = Button$1;
 /* eslint-disable no-nested-ternary */
 var StyledButton$1 = styled__default["default"](Button$2).withConfig({
   displayName: "Button__StyledButton",
-  componentId: "sc-xs2gyw-0"
+  componentId: "sc-125wamt-0"
 })(["svg{margin-right:10px;}"]);
 var Button = /*#__PURE__*/React__default["default"].forwardRef(function Button(props, ref) {
   return /*#__PURE__*/React__default["default"].createElement(StyledButton$1, props, props.children);
@@ -8040,24 +8040,10 @@ module.exports = _objectWithoutProperties, module.exports.__esModule = true, mod
 
 var _objectWithoutProperties = unwrapExports(objectWithoutProperties);
 
-var _excluded$1 = ["primary", "backgroundColor", "size", "label", "onClick"];
-var Button2 = function Button2(_ref) {
-  _ref.primary;
-      _ref.backgroundColor;
-      _ref.size;
-      var label = _ref.label,
-      onClick = _ref.onClick;
-      _objectWithoutProperties(_ref, _excluded$1);
-
-  return /*#__PURE__*/React__default["default"].createElement(Button$2, {
-    onClick: onClick
-  }, label);
-};
-
 var _excluded = ["primary", "backgroundColor", "size", "label", "onClick"];
 var StyledButton = styled__default["default"].button.withConfig({
   displayName: "Button3__StyledButton",
-  componentId: "sc-f8zamk-0"
+  componentId: "sc-gjs2up-0"
 })(["width:100px;height:100px;font-size:1em;margin:1em;padding:0.25em 1em;border:2px solid palevioletred;border-radius:3px;background-color:", ";"], function (props) {
   return props.backgroundColor || "unset";
 });
@@ -8076,7 +8062,6 @@ var Button3 = function Button3(_ref) {
 };
 
 exports.Button = Button;
-exports.Button2 = Button2;
 exports.Button3 = Button3;
 exports.styleReset = styleReset;
 //# sourceMappingURL=index.js.map

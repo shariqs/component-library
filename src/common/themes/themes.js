@@ -2,7 +2,7 @@ const themes = {};
 // https://www.youtube.com/watch?v=LYQ-Cue205A rose 1:27
 // https://www.youtube.com/watch?v=5OGOwzGbnFw
 
-// Keep in-sync w/ 'src/common/theme.js'
+// Keep in-sync w/ 'src/common/themes/theme.js'
 
 themes.default = {
   name: 'default',
