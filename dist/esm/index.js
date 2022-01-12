@@ -176,14 +176,14 @@ function _inherits(subClass, superClass) {
     throw new TypeError("Super expression must either be null or a function");
   }
 
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
   Object.defineProperty(subClass, "prototype", {
-    value: Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        writable: true,
-        configurable: true
-      }
-    }),
     writable: false
   });
   if (superClass) _setPrototypeOf$1(subClass, superClass);
@@ -209,21 +209,15 @@ function _isNativeReflectConstruct$1() {
   }
 }
 
-var _typeof_1 = createCommonjsModule(function (module) {
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
-  return (module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
     return typeof obj;
   } : function (obj) {
     return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports), _typeof(obj);
+  }, _typeof(obj);
 }
-
-module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-
-var _typeof$1 = unwrapExports(_typeof_1);
 
 function _assertThisInitialized(self) {
   if (self === void 0) {
@@ -234,7 +228,7 @@ function _assertThisInitialized(self) {
 }
 
 function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof$1(call) === "object" || typeof call === "function")) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
     return call;
   } else if (call !== void 0) {
     throw new TypeError("Derived constructors may only return object or undefined");
@@ -258,16 +252,6 @@ function _createSuper(Derived) {
 
     return _possibleConstructorReturn(this, result);
   };
-}
-
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-    return typeof obj;
-  } : function (obj) {
-    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-  }, _typeof(obj);
 }
 
 var classnames = createCommonjsModule(function (module) {
@@ -2863,7 +2847,7 @@ function isSimilar(source, target) {
 function defaultGetValueFromEvent(valuePropName) {
   var event = arguments.length <= 1 ? undefined : arguments[1];
 
-  if (event && event.target && valuePropName in event.target) {
+  if (event && event.target && _typeof(event.target) === 'object' && valuePropName in event.target) {
     return event.target[valuePropName];
   }
 
@@ -4180,7 +4164,7 @@ var NameMap = /*#__PURE__*/function () {
 }();
 
 var _excluded$5 = ["name", "errors"];
-var FormStore = function FormStore(forceRootUpdate) {
+var FormStore = /*#__PURE__*/_createClass(function FormStore(forceRootUpdate) {
   var _this = this;
 
   _classCallCheck(this, FormStore);
@@ -5024,7 +5008,7 @@ var FormStore = function FormStore(forceRootUpdate) {
   };
 
   this.forceRootUpdate = forceRootUpdate;
-};
+});
 
 function useForm(form) {
   var formRef = React.useRef();
@@ -8080,7 +8064,7 @@ var StyledButton = styled.button.withConfig({
   displayName: "Button3__StyledButton",
   componentId: "sc-f8zamk-0"
 })(["width:100px;height:100px;font-size:1em;margin:1em;padding:0.25em 1em;border:2px solid palevioletred;border-radius:3px;background-color:", ";"], function (props) {
-  return props.backgroundColor || "green";
+  return props.backgroundColor || "blue";
 });
 var Button3 = function Button3(_ref) {
   _ref.primary;

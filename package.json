@@ -18,8 +18,8 @@
     "start": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public -o ./storybook",
     "build": "rm -rf dist && npm run build:prod",
-    "build-dev": "cross-env NODE_ENV=development rollup -c",
-    "build-prod": "cross-env NODE_ENV=production rollup -c",
+    "build-dev": "rollup -c",
+    "build-prod": "rollup -c",
     "prettier": "prettier --write \"src/**/*.+(js|jsx|json|css|md)\"",
     "linter": "eslint --fix \"src/**/*.+(js|jsx|css)\"",
     "lint": "npm run linter && npm run prettier"
@@ -56,7 +56,6 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.3",
     "babel-plugin-styled-components": "^2.0.2",
-    "cross-env": "^7.0.3",
     "eslint": "^8.5.0",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-config-prettier": "^6.10.0",
