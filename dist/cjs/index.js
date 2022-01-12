@@ -36,102 +36,6 @@ var ReactDOM__default = /*#__PURE__*/_interopDefaultLegacy(ReactDOM);
 
 var styleReset = "\n  html,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}\n/* HTML5 display-role reset for older browsers */\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\nsection {\n  display: block;\n}\nbody {\n  line-height: 1.5;\n}\nol,\nul {\n  list-style: none;\n}\nblockquote,\nq {\n  quotes: none;\n}\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: \"\";\n  content: none;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\na {\n  color: inherit;\n  text-decoration: none;\n}\nul,\nli {\n  list-style-type: none;\n}\nbutton {\n  outline: none;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: sans-serif;\n  color: black;\n}\n\ncode {\n  font-family: source-code-pro, Menlo, Monaco, Consolas, \"Courier New\",\n    monospace;\n}\n\ninput[type=\"number\"]::-webkit-outer-spin-button,\ninput[type=\"number\"]::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}\n\ninput[type=\"number\"] {\n  -moz-appearance: textfield;\n}\n\n";
 
-function unwrapExports (x) {
-	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-}
-
-function createCommonjsModule(fn, module) {
-	return module = { exports: {} }, fn(module, module.exports), module.exports;
-}
-
-var _extends_1 = createCommonjsModule(function (module) {
-function _extends() {
-  module.exports = _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
-  return _extends.apply(this, arguments);
-}
-
-module.exports = _extends, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-
-var _extends$2 = unwrapExports(_extends_1);
-
-var objectWithoutPropertiesLoose = createCommonjsModule(function (module) {
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-
-  return target;
-}
-
-module.exports = _objectWithoutPropertiesLoose, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-
-unwrapExports(objectWithoutPropertiesLoose);
-
-var objectWithoutProperties = createCommonjsModule(function (module) {
-function _objectWithoutProperties(source, excluded) {
-  if (source == null) return {};
-  var target = objectWithoutPropertiesLoose(source, excluded);
-  var key, i;
-
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
-    }
-  }
-
-  return target;
-}
-
-module.exports = _objectWithoutProperties, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-
-var _objectWithoutProperties$1 = unwrapExports(objectWithoutProperties);
-
-var _excluded$7 = ["onClick", "disabled", "children"];
-var StyledButton$1 = styled__default["default"].button.withConfig({
-  displayName: "Button__StyledButton",
-  componentId: "sc-xs2gyw-0"
-})(["width:100px;height:100px;font-size:1em;margin:1em;padding:0.25em 1em;border:2px solid palevioletred;border-radius:3px;"]);
-var Button$2 = /*#__PURE__*/React__default["default"].forwardRef(function Button(props, ref) {
-  var onClick = props.onClick,
-      disabled = props.disabled,
-      children = props.children,
-      otherProps = _objectWithoutProperties$1(props, _excluded$7);
-
-  return /*#__PURE__*/React__default["default"].createElement(StyledButton$1, _extends$2({
-    onClick: disabled ? undefined : onClick,
-    disabled: disabled,
-    isDisabled: disabled,
-    ref: ref
-  }, otherProps), children);
-});
-
 function _extends$1() {
   _extends$1 = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -280,6 +184,14 @@ function _createSuper(Derived) {
 
     return _possibleConstructorReturn(this, result);
   };
+}
+
+function unwrapExports (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+}
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
 }
 
 var classnames = createCommonjsModule(function (module) {
@@ -491,7 +403,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties(source, excluded) {
+function _objectWithoutProperties$1(source, excluded) {
   if (source == null) return {};
   var target = _objectWithoutPropertiesLoose(source, excluded);
   var key, i;
@@ -3857,7 +3769,7 @@ Field.defaultProps = {
 
 function WrapperField(_ref5) {
   var name = _ref5.name,
-      restProps = _objectWithoutProperties(_ref5, _excluded$6);
+      restProps = _objectWithoutProperties$1(_ref5, _excluded$6);
 
   var fieldContext = React__namespace.useContext(Context);
   var namePath = name !== undefined ? getNamePath(name) : undefined;
@@ -4627,7 +4539,7 @@ var FormStore = /*#__PURE__*/_createClass(function FormStore(forceRootUpdate) {
     fields.forEach(function (fieldData) {
       var name = fieldData.name;
           fieldData.errors;
-          var data = _objectWithoutProperties(fieldData, _excluded$5);
+          var data = _objectWithoutProperties$1(fieldData, _excluded$5);
 
       var namePath = getNamePath(name); // Value
 
@@ -5138,7 +5050,7 @@ var Form = function Form(_ref, ref) {
       _onFieldsChange = _ref.onFieldsChange,
       _onFinish = _ref.onFinish,
       onFinishFailed = _ref.onFinishFailed,
-      restProps = _objectWithoutProperties(_ref, _excluded$4);
+      restProps = _objectWithoutProperties$1(_ref, _excluded$4);
 
   var formContext = React__namespace.useContext(FormContext); // We customize handle event since Context will makes all the consumer re-render:
   // https://reactjs.org/docs/context.html#contextprovider
@@ -7331,7 +7243,7 @@ var IconBase = function IconBase(props) {
       style = props.style,
       primaryColor = props.primaryColor,
       secondaryColor = props.secondaryColor,
-      restProps = _objectWithoutProperties(props, _excluded$3);
+      restProps = _objectWithoutProperties$1(props, _excluded$3);
 
   var colors = twoToneColorPalette;
 
@@ -7409,7 +7321,7 @@ var Icon = /*#__PURE__*/React__namespace.forwardRef(function (props, ref) {
       tabIndex = props.tabIndex,
       onClick = props.onClick,
       twoToneColor = props.twoToneColor,
-      restProps = _objectWithoutProperties(props, _excluded$2);
+      restProps = _objectWithoutProperties$1(props, _excluded$2);
 
   var _React$useContext = React__namespace.useContext(IconContext$1),
       _React$useContext$pre = _React$useContext.prefixCls,
@@ -8067,11 +7979,66 @@ var InternalButton = function InternalButton(props, ref) {
   }, buttonNode);
 };
 
-var Button = /*#__PURE__*/React__namespace.forwardRef(InternalButton);
-Button.displayName = 'Button';
-Button.Group = Group;
-Button.__ANT_BUTTON = true;
-var Button$1 = Button;
+var Button$1 = /*#__PURE__*/React__namespace.forwardRef(InternalButton);
+Button$1.displayName = 'Button';
+Button$1.Group = Group;
+Button$1.__ANT_BUTTON = true;
+var Button$2 = Button$1;
+
+/* eslint-disable no-nested-ternary */
+var StyledButton$1 = styled__default["default"](Button$2).withConfig({
+  displayName: "Button__StyledButton",
+  componentId: "sc-xs2gyw-0"
+})(["svg{margin-right:10px;}"]);
+var Button = /*#__PURE__*/React__default["default"].forwardRef(function Button(props, ref) {
+  return /*#__PURE__*/React__default["default"].createElement(StyledButton$1, props, props.children);
+});
+
+var objectWithoutPropertiesLoose = createCommonjsModule(function (module) {
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+module.exports = _objectWithoutPropertiesLoose, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+unwrapExports(objectWithoutPropertiesLoose);
+
+var objectWithoutProperties = createCommonjsModule(function (module) {
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+  var target = objectWithoutPropertiesLoose(source, excluded);
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+module.exports = _objectWithoutProperties, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var _objectWithoutProperties = unwrapExports(objectWithoutProperties);
 
 var _excluded$1 = ["primary", "backgroundColor", "size", "label", "onClick"];
 var Button2 = function Button2(_ref) {
@@ -8080,9 +8047,9 @@ var Button2 = function Button2(_ref) {
       _ref.size;
       var label = _ref.label,
       onClick = _ref.onClick;
-      _objectWithoutProperties$1(_ref, _excluded$1);
+      _objectWithoutProperties(_ref, _excluded$1);
 
-  return /*#__PURE__*/React__default["default"].createElement(Button$1, {
+  return /*#__PURE__*/React__default["default"].createElement(Button$2, {
     onClick: onClick
   }, label);
 };
@@ -8092,7 +8059,7 @@ var StyledButton = styled__default["default"].button.withConfig({
   displayName: "Button3__StyledButton",
   componentId: "sc-f8zamk-0"
 })(["width:100px;height:100px;font-size:1em;margin:1em;padding:0.25em 1em;border:2px solid palevioletred;border-radius:3px;background-color:", ";"], function (props) {
-  return props.backgroundColor || "blue";
+  return props.backgroundColor || "unset";
 });
 var Button3 = function Button3(_ref) {
   _ref.primary;
@@ -8100,7 +8067,7 @@ var Button3 = function Button3(_ref) {
       _ref.size;
       var label = _ref.label,
       onClick = _ref.onClick;
-      _objectWithoutProperties$1(_ref, _excluded);
+      _objectWithoutProperties(_ref, _excluded);
 
   return /*#__PURE__*/React__default["default"].createElement(StyledButton, {
     onClick: onClick,
@@ -8108,7 +8075,7 @@ var Button3 = function Button3(_ref) {
   }, label);
 };
 
-exports.Button = Button$2;
+exports.Button = Button;
 exports.Button2 = Button2;
 exports.Button3 = Button3;
 exports.styleReset = styleReset;

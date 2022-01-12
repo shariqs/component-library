@@ -1,6 +1,7 @@
 
 import React from 'react';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { Button } from './Button';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -16,26 +17,25 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template = (args) => <Button {...args} />;
 
-export const Primary = Template.bind({});
+export const Standard = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
-  primary: true,
-  label: 'Button',
+Standard.args = {
+  children: "I am a button"
 };
 
-export const Secondary = Template.bind({});
-Secondary.args = {
-  label: 'Button',
+export const With_Icon = Template.bind({});
+With_Icon.args = {
+  children: (<>
+    <FontAwesomeIcon icon={faPlus} />
+    Add Item
+  </>)
 };
 
-export const Large = Template.bind({});
-Large.args = {
-  size: 'large',
-  label: 'Button',
-};
-
-export const Small = Template.bind({});
-Small.args = {
-  size: 'small',
-  label: 'Button',
+export const Disabled = Template.bind({});
+Disabled.args = {
+  disabled: true,
+  children: (<>
+    <FontAwesomeIcon icon={faPlus} />
+    Add Item
+  </>),
 };

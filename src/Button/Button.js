@@ -2,27 +2,17 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import { Button as AntButton } from 'antd';
 
-export const StyledButton = styled.button`
-  width: 100px;
-  height: 100px;
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
+export const StyledButton = styled(AntButton)`
+  svg {
+    margin-right: 10px;
+  }
 `;
 
 export const Button = React.forwardRef(function Button(props, ref) {
-  const { onClick, disabled, children, ...otherProps } = props;
   return (
-    <StyledButton
-      onClick={disabled ? undefined : onClick}
-      disabled={disabled}
-      isDisabled={disabled}
-      ref={ref}
-      {...otherProps}
-    >
-      {children}
+    <StyledButton {...props} >
+      {props.children}
     </StyledButton>)
 });
