@@ -7,16 +7,25 @@ import { Input } from './Input';
 export default {
 	title: 'Input',
 	component: Input,
+	args: {
+		label: "This is a label",
+		placeholder: "This is a placeholder",
+		value: ""
+	}
 };
+
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template = (args) => <Input {...args} />;
 
 export const Standard = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Standard.args = {
+
+export const Required = Template.bind({});
+Required.args = {
 	required: true,
-	label: 'This is a label',
-	placeholder: 'This is a placeholder',
-	value: ""
+};
+
+export const With_Error = Template.bind({});
+With_Error.args = {
+	required: true,
 };

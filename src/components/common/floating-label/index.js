@@ -9,6 +9,7 @@ export const StyledFloatWrapper = styled.div`
 
 	.required {
 		/* color: $primary-color; */
+		color: #FF0000;
 		opacity: 0.5;
 	}
 
