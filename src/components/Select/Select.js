@@ -21,7 +21,7 @@ export const StyledSelect = styled(AntSelect)`
 	}
 `;
 
-export const Select = React.forwardRef(function Select({ testValues, required, label, placeholder, value, children, height, ...other }, ref) {
+export const Select = React.forwardRef(function Select({ testValues = [], required, label, placeholder, value, children, height, ...other }, ref) {
 	// This function meant for testing w/ storybook only
 	// Type into 'value' arg to 'select' a child
 	if (testValues.length > 0) {

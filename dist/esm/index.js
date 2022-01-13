@@ -21335,7 +21335,8 @@ var StyledSelect = styled(AntSelect).withConfig({
   componentId: "sc-11prrv0-0"
 })(["width:100%;&&&{.ant-select-selector{height:50px !important;}.ant-select-selection-item{position:relative;top:15px;}}"]);
 var Select = /*#__PURE__*/React__default.forwardRef(function Select(_ref, ref) {
-  var testValues = _ref.testValues,
+  var _ref$testValues = _ref.testValues,
+      testValues = _ref$testValues === void 0 ? [] : _ref$testValues,
       required = _ref.required,
       label = _ref.label,
       placeholder = _ref.placeholder,
