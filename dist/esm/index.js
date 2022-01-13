@@ -8,8 +8,8 @@ import ReactDOM from 'react-dom';
 
 var styleReset = "\n  html,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}\n/* HTML5 display-role reset for older browsers */\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\nsection {\n  display: block;\n}\nbody {\n  line-height: 1.5;\n}\nol,\nul {\n  list-style: none;\n}\nblockquote,\nq {\n  quotes: none;\n}\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: \"\";\n  content: none;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\na {\n  color: inherit;\n  text-decoration: none;\n}\nul,\nli {\n  list-style-type: none;\n}\nbutton {\n  outline: none;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: sans-serif;\n  color: black;\n}\n\ncode {\n  font-family: source-code-pro, Menlo, Monaco, Consolas, \"Courier New\",\n    monospace;\n}\n\ninput[type=\"number\"]::-webkit-outer-spin-button,\ninput[type=\"number\"]::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}\n\ninput[type=\"number\"] {\n  -moz-appearance: textfield;\n}\n\n";
 
-function _extends$1() {
-  _extends$1 = Object.assign || function (target) {
+function _extends$2() {
+  _extends$2 = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
 
@@ -23,10 +23,10 @@ function _extends$1() {
     return target;
   };
 
-  return _extends$1.apply(this, arguments);
+  return _extends$2.apply(this, arguments);
 }
 
-function _defineProperty(obj, key, value) {
+function _defineProperty$1(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -158,6 +158,10 @@ function _createSuper(Derived) {
   };
 }
 
+function unwrapExports (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+}
+
 function createCommonjsModule(fn, module) {
 	return module = { exports: {} }, fn(module, module.exports), module.exports;
 }
@@ -217,7 +221,7 @@ var classnames = createCommonjsModule(function (module) {
 }());
 });
 
-function ownKeys(object, enumerableOnly) {
+function ownKeys$1(object, enumerableOnly) {
   var keys = Object.keys(object);
 
   if (Object.getOwnPropertySymbols) {
@@ -233,9 +237,9 @@ function ownKeys(object, enumerableOnly) {
 function _objectSpread2(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = null != arguments[i] ? arguments[i] : {};
-    i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
-      _defineProperty(target, key, source[key]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
+    i % 2 ? ownKeys$1(Object(source), !0).forEach(function (key) {
+      _defineProperty$1(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function (key) {
       Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
     });
   }
@@ -353,6 +357,1145 @@ function findDOMNode(node) {
   return ReactDOM.findDOMNode(node);
 }
 
+/**
+ * A collection of shims that provide minimal functionality of the ES6 collections.
+ *
+ * These implementations are not meant to be used outside of the ResizeObserver
+ * modules as they cover only a limited range of use cases.
+ */
+/* eslint-disable require-jsdoc, valid-jsdoc */
+var MapShim = (function () {
+    if (typeof Map !== 'undefined') {
+        return Map;
+    }
+    /**
+     * Returns index in provided array that matches the specified key.
+     *
+     * @param {Array<Array>} arr
+     * @param {*} key
+     * @returns {number}
+     */
+    function getIndex(arr, key) {
+        var result = -1;
+        arr.some(function (entry, index) {
+            if (entry[0] === key) {
+                result = index;
+                return true;
+            }
+            return false;
+        });
+        return result;
+    }
+    return /** @class */ (function () {
+        function class_1() {
+            this.__entries__ = [];
+        }
+        Object.defineProperty(class_1.prototype, "size", {
+            /**
+             * @returns {boolean}
+             */
+            get: function () {
+                return this.__entries__.length;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @param {*} key
+         * @returns {*}
+         */
+        class_1.prototype.get = function (key) {
+            var index = getIndex(this.__entries__, key);
+            var entry = this.__entries__[index];
+            return entry && entry[1];
+        };
+        /**
+         * @param {*} key
+         * @param {*} value
+         * @returns {void}
+         */
+        class_1.prototype.set = function (key, value) {
+            var index = getIndex(this.__entries__, key);
+            if (~index) {
+                this.__entries__[index][1] = value;
+            }
+            else {
+                this.__entries__.push([key, value]);
+            }
+        };
+        /**
+         * @param {*} key
+         * @returns {void}
+         */
+        class_1.prototype.delete = function (key) {
+            var entries = this.__entries__;
+            var index = getIndex(entries, key);
+            if (~index) {
+                entries.splice(index, 1);
+            }
+        };
+        /**
+         * @param {*} key
+         * @returns {void}
+         */
+        class_1.prototype.has = function (key) {
+            return !!~getIndex(this.__entries__, key);
+        };
+        /**
+         * @returns {void}
+         */
+        class_1.prototype.clear = function () {
+            this.__entries__.splice(0);
+        };
+        /**
+         * @param {Function} callback
+         * @param {*} [ctx=null]
+         * @returns {void}
+         */
+        class_1.prototype.forEach = function (callback, ctx) {
+            if (ctx === void 0) { ctx = null; }
+            for (var _i = 0, _a = this.__entries__; _i < _a.length; _i++) {
+                var entry = _a[_i];
+                callback.call(ctx, entry[1], entry[0]);
+            }
+        };
+        return class_1;
+    }());
+})();
+
+/**
+ * Detects whether window and document objects are available in current environment.
+ */
+var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined' && window.document === document;
+
+// Returns global object of a current environment.
+var global$1 = (function () {
+    if (typeof global !== 'undefined' && global.Math === Math) {
+        return global;
+    }
+    if (typeof self !== 'undefined' && self.Math === Math) {
+        return self;
+    }
+    if (typeof window !== 'undefined' && window.Math === Math) {
+        return window;
+    }
+    // eslint-disable-next-line no-new-func
+    return Function('return this')();
+})();
+
+/**
+ * A shim for the requestAnimationFrame which falls back to the setTimeout if
+ * first one is not supported.
+ *
+ * @returns {number} Requests' identifier.
+ */
+var requestAnimationFrame$1 = (function () {
+    if (typeof requestAnimationFrame === 'function') {
+        // It's required to use a bounded function because IE sometimes throws
+        // an "Invalid calling object" error if rAF is invoked without the global
+        // object on the left hand side.
+        return requestAnimationFrame.bind(global$1);
+    }
+    return function (callback) { return setTimeout(function () { return callback(Date.now()); }, 1000 / 60); };
+})();
+
+// Defines minimum timeout before adding a trailing call.
+var trailingTimeout = 2;
+/**
+ * Creates a wrapper function which ensures that provided callback will be
+ * invoked only once during the specified delay period.
+ *
+ * @param {Function} callback - Function to be invoked after the delay period.
+ * @param {number} delay - Delay after which to invoke callback.
+ * @returns {Function}
+ */
+function throttle (callback, delay) {
+    var leadingCall = false, trailingCall = false, lastCallTime = 0;
+    /**
+     * Invokes the original callback function and schedules new invocation if
+     * the "proxy" was called during current request.
+     *
+     * @returns {void}
+     */
+    function resolvePending() {
+        if (leadingCall) {
+            leadingCall = false;
+            callback();
+        }
+        if (trailingCall) {
+            proxy();
+        }
+    }
+    /**
+     * Callback invoked after the specified delay. It will further postpone
+     * invocation of the original function delegating it to the
+     * requestAnimationFrame.
+     *
+     * @returns {void}
+     */
+    function timeoutCallback() {
+        requestAnimationFrame$1(resolvePending);
+    }
+    /**
+     * Schedules invocation of the original function.
+     *
+     * @returns {void}
+     */
+    function proxy() {
+        var timeStamp = Date.now();
+        if (leadingCall) {
+            // Reject immediately following calls.
+            if (timeStamp - lastCallTime < trailingTimeout) {
+                return;
+            }
+            // Schedule new call to be in invoked when the pending one is resolved.
+            // This is important for "transitions" which never actually start
+            // immediately so there is a chance that we might miss one if change
+            // happens amids the pending invocation.
+            trailingCall = true;
+        }
+        else {
+            leadingCall = true;
+            trailingCall = false;
+            setTimeout(timeoutCallback, delay);
+        }
+        lastCallTime = timeStamp;
+    }
+    return proxy;
+}
+
+// Minimum delay before invoking the update of observers.
+var REFRESH_DELAY = 20;
+// A list of substrings of CSS properties used to find transition events that
+// might affect dimensions of observed elements.
+var transitionKeys = ['top', 'right', 'bottom', 'left', 'width', 'height', 'size', 'weight'];
+// Check if MutationObserver is available.
+var mutationObserverSupported = typeof MutationObserver !== 'undefined';
+/**
+ * Singleton controller class which handles updates of ResizeObserver instances.
+ */
+var ResizeObserverController = /** @class */ (function () {
+    /**
+     * Creates a new instance of ResizeObserverController.
+     *
+     * @private
+     */
+    function ResizeObserverController() {
+        /**
+         * Indicates whether DOM listeners have been added.
+         *
+         * @private {boolean}
+         */
+        this.connected_ = false;
+        /**
+         * Tells that controller has subscribed for Mutation Events.
+         *
+         * @private {boolean}
+         */
+        this.mutationEventsAdded_ = false;
+        /**
+         * Keeps reference to the instance of MutationObserver.
+         *
+         * @private {MutationObserver}
+         */
+        this.mutationsObserver_ = null;
+        /**
+         * A list of connected observers.
+         *
+         * @private {Array<ResizeObserverSPI>}
+         */
+        this.observers_ = [];
+        this.onTransitionEnd_ = this.onTransitionEnd_.bind(this);
+        this.refresh = throttle(this.refresh.bind(this), REFRESH_DELAY);
+    }
+    /**
+     * Adds observer to observers list.
+     *
+     * @param {ResizeObserverSPI} observer - Observer to be added.
+     * @returns {void}
+     */
+    ResizeObserverController.prototype.addObserver = function (observer) {
+        if (!~this.observers_.indexOf(observer)) {
+            this.observers_.push(observer);
+        }
+        // Add listeners if they haven't been added yet.
+        if (!this.connected_) {
+            this.connect_();
+        }
+    };
+    /**
+     * Removes observer from observers list.
+     *
+     * @param {ResizeObserverSPI} observer - Observer to be removed.
+     * @returns {void}
+     */
+    ResizeObserverController.prototype.removeObserver = function (observer) {
+        var observers = this.observers_;
+        var index = observers.indexOf(observer);
+        // Remove observer if it's present in registry.
+        if (~index) {
+            observers.splice(index, 1);
+        }
+        // Remove listeners if controller has no connected observers.
+        if (!observers.length && this.connected_) {
+            this.disconnect_();
+        }
+    };
+    /**
+     * Invokes the update of observers. It will continue running updates insofar
+     * it detects changes.
+     *
+     * @returns {void}
+     */
+    ResizeObserverController.prototype.refresh = function () {
+        var changesDetected = this.updateObservers_();
+        // Continue running updates if changes have been detected as there might
+        // be future ones caused by CSS transitions.
+        if (changesDetected) {
+            this.refresh();
+        }
+    };
+    /**
+     * Updates every observer from observers list and notifies them of queued
+     * entries.
+     *
+     * @private
+     * @returns {boolean} Returns "true" if any observer has detected changes in
+     *      dimensions of it's elements.
+     */
+    ResizeObserverController.prototype.updateObservers_ = function () {
+        // Collect observers that have active observations.
+        var activeObservers = this.observers_.filter(function (observer) {
+            return observer.gatherActive(), observer.hasActive();
+        });
+        // Deliver notifications in a separate cycle in order to avoid any
+        // collisions between observers, e.g. when multiple instances of
+        // ResizeObserver are tracking the same element and the callback of one
+        // of them changes content dimensions of the observed target. Sometimes
+        // this may result in notifications being blocked for the rest of observers.
+        activeObservers.forEach(function (observer) { return observer.broadcastActive(); });
+        return activeObservers.length > 0;
+    };
+    /**
+     * Initializes DOM listeners.
+     *
+     * @private
+     * @returns {void}
+     */
+    ResizeObserverController.prototype.connect_ = function () {
+        // Do nothing if running in a non-browser environment or if listeners
+        // have been already added.
+        if (!isBrowser || this.connected_) {
+            return;
+        }
+        // Subscription to the "Transitionend" event is used as a workaround for
+        // delayed transitions. This way it's possible to capture at least the
+        // final state of an element.
+        document.addEventListener('transitionend', this.onTransitionEnd_);
+        window.addEventListener('resize', this.refresh);
+        if (mutationObserverSupported) {
+            this.mutationsObserver_ = new MutationObserver(this.refresh);
+            this.mutationsObserver_.observe(document, {
+                attributes: true,
+                childList: true,
+                characterData: true,
+                subtree: true
+            });
+        }
+        else {
+            document.addEventListener('DOMSubtreeModified', this.refresh);
+            this.mutationEventsAdded_ = true;
+        }
+        this.connected_ = true;
+    };
+    /**
+     * Removes DOM listeners.
+     *
+     * @private
+     * @returns {void}
+     */
+    ResizeObserverController.prototype.disconnect_ = function () {
+        // Do nothing if running in a non-browser environment or if listeners
+        // have been already removed.
+        if (!isBrowser || !this.connected_) {
+            return;
+        }
+        document.removeEventListener('transitionend', this.onTransitionEnd_);
+        window.removeEventListener('resize', this.refresh);
+        if (this.mutationsObserver_) {
+            this.mutationsObserver_.disconnect();
+        }
+        if (this.mutationEventsAdded_) {
+            document.removeEventListener('DOMSubtreeModified', this.refresh);
+        }
+        this.mutationsObserver_ = null;
+        this.mutationEventsAdded_ = false;
+        this.connected_ = false;
+    };
+    /**
+     * "Transitionend" event handler.
+     *
+     * @private
+     * @param {TransitionEvent} event
+     * @returns {void}
+     */
+    ResizeObserverController.prototype.onTransitionEnd_ = function (_a) {
+        var _b = _a.propertyName, propertyName = _b === void 0 ? '' : _b;
+        // Detect whether transition may affect dimensions of an element.
+        var isReflowProperty = transitionKeys.some(function (key) {
+            return !!~propertyName.indexOf(key);
+        });
+        if (isReflowProperty) {
+            this.refresh();
+        }
+    };
+    /**
+     * Returns instance of the ResizeObserverController.
+     *
+     * @returns {ResizeObserverController}
+     */
+    ResizeObserverController.getInstance = function () {
+        if (!this.instance_) {
+            this.instance_ = new ResizeObserverController();
+        }
+        return this.instance_;
+    };
+    /**
+     * Holds reference to the controller's instance.
+     *
+     * @private {ResizeObserverController}
+     */
+    ResizeObserverController.instance_ = null;
+    return ResizeObserverController;
+}());
+
+/**
+ * Defines non-writable/enumerable properties of the provided target object.
+ *
+ * @param {Object} target - Object for which to define properties.
+ * @param {Object} props - Properties to be defined.
+ * @returns {Object} Target object.
+ */
+var defineConfigurable = (function (target, props) {
+    for (var _i = 0, _a = Object.keys(props); _i < _a.length; _i++) {
+        var key = _a[_i];
+        Object.defineProperty(target, key, {
+            value: props[key],
+            enumerable: false,
+            writable: false,
+            configurable: true
+        });
+    }
+    return target;
+});
+
+/**
+ * Returns the global object associated with provided element.
+ *
+ * @param {Object} target
+ * @returns {Object}
+ */
+var getWindowOf = (function (target) {
+    // Assume that the element is an instance of Node, which means that it
+    // has the "ownerDocument" property from which we can retrieve a
+    // corresponding global object.
+    var ownerGlobal = target && target.ownerDocument && target.ownerDocument.defaultView;
+    // Return the local global object if it's not possible extract one from
+    // provided element.
+    return ownerGlobal || global$1;
+});
+
+// Placeholder of an empty content rectangle.
+var emptyRect = createRectInit(0, 0, 0, 0);
+/**
+ * Converts provided string to a number.
+ *
+ * @param {number|string} value
+ * @returns {number}
+ */
+function toFloat(value) {
+    return parseFloat(value) || 0;
+}
+/**
+ * Extracts borders size from provided styles.
+ *
+ * @param {CSSStyleDeclaration} styles
+ * @param {...string} positions - Borders positions (top, right, ...)
+ * @returns {number}
+ */
+function getBordersSize(styles) {
+    var positions = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        positions[_i - 1] = arguments[_i];
+    }
+    return positions.reduce(function (size, position) {
+        var value = styles['border-' + position + '-width'];
+        return size + toFloat(value);
+    }, 0);
+}
+/**
+ * Extracts paddings sizes from provided styles.
+ *
+ * @param {CSSStyleDeclaration} styles
+ * @returns {Object} Paddings box.
+ */
+function getPaddings(styles) {
+    var positions = ['top', 'right', 'bottom', 'left'];
+    var paddings = {};
+    for (var _i = 0, positions_1 = positions; _i < positions_1.length; _i++) {
+        var position = positions_1[_i];
+        var value = styles['padding-' + position];
+        paddings[position] = toFloat(value);
+    }
+    return paddings;
+}
+/**
+ * Calculates content rectangle of provided SVG element.
+ *
+ * @param {SVGGraphicsElement} target - Element content rectangle of which needs
+ *      to be calculated.
+ * @returns {DOMRectInit}
+ */
+function getSVGContentRect(target) {
+    var bbox = target.getBBox();
+    return createRectInit(0, 0, bbox.width, bbox.height);
+}
+/**
+ * Calculates content rectangle of provided HTMLElement.
+ *
+ * @param {HTMLElement} target - Element for which to calculate the content rectangle.
+ * @returns {DOMRectInit}
+ */
+function getHTMLElementContentRect(target) {
+    // Client width & height properties can't be
+    // used exclusively as they provide rounded values.
+    var clientWidth = target.clientWidth, clientHeight = target.clientHeight;
+    // By this condition we can catch all non-replaced inline, hidden and
+    // detached elements. Though elements with width & height properties less
+    // than 0.5 will be discarded as well.
+    //
+    // Without it we would need to implement separate methods for each of
+    // those cases and it's not possible to perform a precise and performance
+    // effective test for hidden elements. E.g. even jQuery's ':visible' filter
+    // gives wrong results for elements with width & height less than 0.5.
+    if (!clientWidth && !clientHeight) {
+        return emptyRect;
+    }
+    var styles = getWindowOf(target).getComputedStyle(target);
+    var paddings = getPaddings(styles);
+    var horizPad = paddings.left + paddings.right;
+    var vertPad = paddings.top + paddings.bottom;
+    // Computed styles of width & height are being used because they are the
+    // only dimensions available to JS that contain non-rounded values. It could
+    // be possible to utilize the getBoundingClientRect if only it's data wasn't
+    // affected by CSS transformations let alone paddings, borders and scroll bars.
+    var width = toFloat(styles.width), height = toFloat(styles.height);
+    // Width & height include paddings and borders when the 'border-box' box
+    // model is applied (except for IE).
+    if (styles.boxSizing === 'border-box') {
+        // Following conditions are required to handle Internet Explorer which
+        // doesn't include paddings and borders to computed CSS dimensions.
+        //
+        // We can say that if CSS dimensions + paddings are equal to the "client"
+        // properties then it's either IE, and thus we don't need to subtract
+        // anything, or an element merely doesn't have paddings/borders styles.
+        if (Math.round(width + horizPad) !== clientWidth) {
+            width -= getBordersSize(styles, 'left', 'right') + horizPad;
+        }
+        if (Math.round(height + vertPad) !== clientHeight) {
+            height -= getBordersSize(styles, 'top', 'bottom') + vertPad;
+        }
+    }
+    // Following steps can't be applied to the document's root element as its
+    // client[Width/Height] properties represent viewport area of the window.
+    // Besides, it's as well not necessary as the <html> itself neither has
+    // rendered scroll bars nor it can be clipped.
+    if (!isDocumentElement(target)) {
+        // In some browsers (only in Firefox, actually) CSS width & height
+        // include scroll bars size which can be removed at this step as scroll
+        // bars are the only difference between rounded dimensions + paddings
+        // and "client" properties, though that is not always true in Chrome.
+        var vertScrollbar = Math.round(width + horizPad) - clientWidth;
+        var horizScrollbar = Math.round(height + vertPad) - clientHeight;
+        // Chrome has a rather weird rounding of "client" properties.
+        // E.g. for an element with content width of 314.2px it sometimes gives
+        // the client width of 315px and for the width of 314.7px it may give
+        // 314px. And it doesn't happen all the time. So just ignore this delta
+        // as a non-relevant.
+        if (Math.abs(vertScrollbar) !== 1) {
+            width -= vertScrollbar;
+        }
+        if (Math.abs(horizScrollbar) !== 1) {
+            height -= horizScrollbar;
+        }
+    }
+    return createRectInit(paddings.left, paddings.top, width, height);
+}
+/**
+ * Checks whether provided element is an instance of the SVGGraphicsElement.
+ *
+ * @param {Element} target - Element to be checked.
+ * @returns {boolean}
+ */
+var isSVGGraphicsElement = (function () {
+    // Some browsers, namely IE and Edge, don't have the SVGGraphicsElement
+    // interface.
+    if (typeof SVGGraphicsElement !== 'undefined') {
+        return function (target) { return target instanceof getWindowOf(target).SVGGraphicsElement; };
+    }
+    // If it's so, then check that element is at least an instance of the
+    // SVGElement and that it has the "getBBox" method.
+    // eslint-disable-next-line no-extra-parens
+    return function (target) { return (target instanceof getWindowOf(target).SVGElement &&
+        typeof target.getBBox === 'function'); };
+})();
+/**
+ * Checks whether provided element is a document element (<html>).
+ *
+ * @param {Element} target - Element to be checked.
+ * @returns {boolean}
+ */
+function isDocumentElement(target) {
+    return target === getWindowOf(target).document.documentElement;
+}
+/**
+ * Calculates an appropriate content rectangle for provided html or svg element.
+ *
+ * @param {Element} target - Element content rectangle of which needs to be calculated.
+ * @returns {DOMRectInit}
+ */
+function getContentRect(target) {
+    if (!isBrowser) {
+        return emptyRect;
+    }
+    if (isSVGGraphicsElement(target)) {
+        return getSVGContentRect(target);
+    }
+    return getHTMLElementContentRect(target);
+}
+/**
+ * Creates rectangle with an interface of the DOMRectReadOnly.
+ * Spec: https://drafts.fxtf.org/geometry/#domrectreadonly
+ *
+ * @param {DOMRectInit} rectInit - Object with rectangle's x/y coordinates and dimensions.
+ * @returns {DOMRectReadOnly}
+ */
+function createReadOnlyRect(_a) {
+    var x = _a.x, y = _a.y, width = _a.width, height = _a.height;
+    // If DOMRectReadOnly is available use it as a prototype for the rectangle.
+    var Constr = typeof DOMRectReadOnly !== 'undefined' ? DOMRectReadOnly : Object;
+    var rect = Object.create(Constr.prototype);
+    // Rectangle's properties are not writable and non-enumerable.
+    defineConfigurable(rect, {
+        x: x, y: y, width: width, height: height,
+        top: y,
+        right: x + width,
+        bottom: height + y,
+        left: x
+    });
+    return rect;
+}
+/**
+ * Creates DOMRectInit object based on the provided dimensions and the x/y coordinates.
+ * Spec: https://drafts.fxtf.org/geometry/#dictdef-domrectinit
+ *
+ * @param {number} x - X coordinate.
+ * @param {number} y - Y coordinate.
+ * @param {number} width - Rectangle's width.
+ * @param {number} height - Rectangle's height.
+ * @returns {DOMRectInit}
+ */
+function createRectInit(x, y, width, height) {
+    return { x: x, y: y, width: width, height: height };
+}
+
+/**
+ * Class that is responsible for computations of the content rectangle of
+ * provided DOM element and for keeping track of it's changes.
+ */
+var ResizeObservation = /** @class */ (function () {
+    /**
+     * Creates an instance of ResizeObservation.
+     *
+     * @param {Element} target - Element to be observed.
+     */
+    function ResizeObservation(target) {
+        /**
+         * Broadcasted width of content rectangle.
+         *
+         * @type {number}
+         */
+        this.broadcastWidth = 0;
+        /**
+         * Broadcasted height of content rectangle.
+         *
+         * @type {number}
+         */
+        this.broadcastHeight = 0;
+        /**
+         * Reference to the last observed content rectangle.
+         *
+         * @private {DOMRectInit}
+         */
+        this.contentRect_ = createRectInit(0, 0, 0, 0);
+        this.target = target;
+    }
+    /**
+     * Updates content rectangle and tells whether it's width or height properties
+     * have changed since the last broadcast.
+     *
+     * @returns {boolean}
+     */
+    ResizeObservation.prototype.isActive = function () {
+        var rect = getContentRect(this.target);
+        this.contentRect_ = rect;
+        return (rect.width !== this.broadcastWidth ||
+            rect.height !== this.broadcastHeight);
+    };
+    /**
+     * Updates 'broadcastWidth' and 'broadcastHeight' properties with a data
+     * from the corresponding properties of the last observed content rectangle.
+     *
+     * @returns {DOMRectInit} Last observed content rectangle.
+     */
+    ResizeObservation.prototype.broadcastRect = function () {
+        var rect = this.contentRect_;
+        this.broadcastWidth = rect.width;
+        this.broadcastHeight = rect.height;
+        return rect;
+    };
+    return ResizeObservation;
+}());
+
+var ResizeObserverEntry = /** @class */ (function () {
+    /**
+     * Creates an instance of ResizeObserverEntry.
+     *
+     * @param {Element} target - Element that is being observed.
+     * @param {DOMRectInit} rectInit - Data of the element's content rectangle.
+     */
+    function ResizeObserverEntry(target, rectInit) {
+        var contentRect = createReadOnlyRect(rectInit);
+        // According to the specification following properties are not writable
+        // and are also not enumerable in the native implementation.
+        //
+        // Property accessors are not being used as they'd require to define a
+        // private WeakMap storage which may cause memory leaks in browsers that
+        // don't support this type of collections.
+        defineConfigurable(this, { target: target, contentRect: contentRect });
+    }
+    return ResizeObserverEntry;
+}());
+
+var ResizeObserverSPI = /** @class */ (function () {
+    /**
+     * Creates a new instance of ResizeObserver.
+     *
+     * @param {ResizeObserverCallback} callback - Callback function that is invoked
+     *      when one of the observed elements changes it's content dimensions.
+     * @param {ResizeObserverController} controller - Controller instance which
+     *      is responsible for the updates of observer.
+     * @param {ResizeObserver} callbackCtx - Reference to the public
+     *      ResizeObserver instance which will be passed to callback function.
+     */
+    function ResizeObserverSPI(callback, controller, callbackCtx) {
+        /**
+         * Collection of resize observations that have detected changes in dimensions
+         * of elements.
+         *
+         * @private {Array<ResizeObservation>}
+         */
+        this.activeObservations_ = [];
+        /**
+         * Registry of the ResizeObservation instances.
+         *
+         * @private {Map<Element, ResizeObservation>}
+         */
+        this.observations_ = new MapShim();
+        if (typeof callback !== 'function') {
+            throw new TypeError('The callback provided as parameter 1 is not a function.');
+        }
+        this.callback_ = callback;
+        this.controller_ = controller;
+        this.callbackCtx_ = callbackCtx;
+    }
+    /**
+     * Starts observing provided element.
+     *
+     * @param {Element} target - Element to be observed.
+     * @returns {void}
+     */
+    ResizeObserverSPI.prototype.observe = function (target) {
+        if (!arguments.length) {
+            throw new TypeError('1 argument required, but only 0 present.');
+        }
+        // Do nothing if current environment doesn't have the Element interface.
+        if (typeof Element === 'undefined' || !(Element instanceof Object)) {
+            return;
+        }
+        if (!(target instanceof getWindowOf(target).Element)) {
+            throw new TypeError('parameter 1 is not of type "Element".');
+        }
+        var observations = this.observations_;
+        // Do nothing if element is already being observed.
+        if (observations.has(target)) {
+            return;
+        }
+        observations.set(target, new ResizeObservation(target));
+        this.controller_.addObserver(this);
+        // Force the update of observations.
+        this.controller_.refresh();
+    };
+    /**
+     * Stops observing provided element.
+     *
+     * @param {Element} target - Element to stop observing.
+     * @returns {void}
+     */
+    ResizeObserverSPI.prototype.unobserve = function (target) {
+        if (!arguments.length) {
+            throw new TypeError('1 argument required, but only 0 present.');
+        }
+        // Do nothing if current environment doesn't have the Element interface.
+        if (typeof Element === 'undefined' || !(Element instanceof Object)) {
+            return;
+        }
+        if (!(target instanceof getWindowOf(target).Element)) {
+            throw new TypeError('parameter 1 is not of type "Element".');
+        }
+        var observations = this.observations_;
+        // Do nothing if element is not being observed.
+        if (!observations.has(target)) {
+            return;
+        }
+        observations.delete(target);
+        if (!observations.size) {
+            this.controller_.removeObserver(this);
+        }
+    };
+    /**
+     * Stops observing all elements.
+     *
+     * @returns {void}
+     */
+    ResizeObserverSPI.prototype.disconnect = function () {
+        this.clearActive();
+        this.observations_.clear();
+        this.controller_.removeObserver(this);
+    };
+    /**
+     * Collects observation instances the associated element of which has changed
+     * it's content rectangle.
+     *
+     * @returns {void}
+     */
+    ResizeObserverSPI.prototype.gatherActive = function () {
+        var _this = this;
+        this.clearActive();
+        this.observations_.forEach(function (observation) {
+            if (observation.isActive()) {
+                _this.activeObservations_.push(observation);
+            }
+        });
+    };
+    /**
+     * Invokes initial callback function with a list of ResizeObserverEntry
+     * instances collected from active resize observations.
+     *
+     * @returns {void}
+     */
+    ResizeObserverSPI.prototype.broadcastActive = function () {
+        // Do nothing if observer doesn't have active observations.
+        if (!this.hasActive()) {
+            return;
+        }
+        var ctx = this.callbackCtx_;
+        // Create ResizeObserverEntry instance for every active observation.
+        var entries = this.activeObservations_.map(function (observation) {
+            return new ResizeObserverEntry(observation.target, observation.broadcastRect());
+        });
+        this.callback_.call(ctx, entries, ctx);
+        this.clearActive();
+    };
+    /**
+     * Clears the collection of active observations.
+     *
+     * @returns {void}
+     */
+    ResizeObserverSPI.prototype.clearActive = function () {
+        this.activeObservations_.splice(0);
+    };
+    /**
+     * Tells whether observer has active observations.
+     *
+     * @returns {boolean}
+     */
+    ResizeObserverSPI.prototype.hasActive = function () {
+        return this.activeObservations_.length > 0;
+    };
+    return ResizeObserverSPI;
+}());
+
+// Registry of internal observers. If WeakMap is not available use current shim
+// for the Map collection as it has all required methods and because WeakMap
+// can't be fully polyfilled anyway.
+var observers = typeof WeakMap !== 'undefined' ? new WeakMap() : new MapShim();
+/**
+ * ResizeObserver API. Encapsulates the ResizeObserver SPI implementation
+ * exposing only those methods and properties that are defined in the spec.
+ */
+var ResizeObserver$1 = /** @class */ (function () {
+    /**
+     * Creates a new instance of ResizeObserver.
+     *
+     * @param {ResizeObserverCallback} callback - Callback that is invoked when
+     *      dimensions of the observed elements change.
+     */
+    function ResizeObserver(callback) {
+        if (!(this instanceof ResizeObserver)) {
+            throw new TypeError('Cannot call a class as a function.');
+        }
+        if (!arguments.length) {
+            throw new TypeError('1 argument required, but only 0 present.');
+        }
+        var controller = ResizeObserverController.getInstance();
+        var observer = new ResizeObserverSPI(callback, controller, this);
+        observers.set(this, observer);
+    }
+    return ResizeObserver;
+}());
+// Expose public methods of ResizeObserver.
+[
+    'observe',
+    'unobserve',
+    'disconnect'
+].forEach(function (method) {
+    ResizeObserver$1.prototype[method] = function () {
+        var _a;
+        return (_a = observers.get(this))[method].apply(_a, arguments);
+    };
+});
+
+var index = (function () {
+    // Export existing implementation if available.
+    if (typeof global$1.ResizeObserver !== 'undefined') {
+        return global$1.ResizeObserver;
+    }
+    return ResizeObserver$1;
+})();
+
+var elementListeners = new Map();
+
+function onResize(entities) {
+  entities.forEach(function (entity) {
+    var _elementListeners$get;
+
+    var target = entity.target;
+    (_elementListeners$get = elementListeners.get(target)) === null || _elementListeners$get === void 0 ? void 0 : _elementListeners$get.forEach(function (listener) {
+      return listener(target);
+    });
+  });
+} // Note: ResizeObserver polyfill not support option to measure border-box resize
+
+
+var resizeObserver = new index(onResize); // Dev env only
+// ============================== Observe ==============================
+
+function observe(element, callback) {
+  if (!elementListeners.has(element)) {
+    elementListeners.set(element, new Set());
+    resizeObserver.observe(element);
+  }
+
+  elementListeners.get(element).add(callback);
+}
+function unobserve(element, callback) {
+  if (elementListeners.has(element)) {
+    elementListeners.get(element).delete(callback);
+
+    if (!elementListeners.get(element).size) {
+      resizeObserver.unobserve(element);
+      elementListeners.delete(element);
+    }
+  }
+}
+
+/**
+ * Fallback to findDOMNode if origin ref do not provide any dom element
+ */
+
+var DomWrapper$1 = /*#__PURE__*/function (_React$Component) {
+  _inherits(DomWrapper, _React$Component);
+
+  var _super = _createSuper(DomWrapper);
+
+  function DomWrapper() {
+    _classCallCheck(this, DomWrapper);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(DomWrapper, [{
+    key: "render",
+    value: function render() {
+      return this.props.children;
+    }
+  }]);
+
+  return DomWrapper;
+}(React.Component);
+
+var CollectionContext = /*#__PURE__*/React.createContext(null);
+/**
+ * Collect all the resize event from children ResizeObserver
+ */
+
+function Collection(_ref) {
+  var children = _ref.children,
+      onBatchResize = _ref.onBatchResize;
+  var resizeIdRef = React.useRef(0);
+  var resizeInfosRef = React.useRef([]);
+  var onCollectionResize = React.useContext(CollectionContext);
+  var onResize = React.useCallback(function (size, element, data) {
+    resizeIdRef.current += 1;
+    var currentId = resizeIdRef.current;
+    resizeInfosRef.current.push({
+      size: size,
+      element: element,
+      data: data
+    });
+    Promise.resolve().then(function () {
+      if (currentId === resizeIdRef.current) {
+        onBatchResize === null || onBatchResize === void 0 ? void 0 : onBatchResize(resizeInfosRef.current);
+        resizeInfosRef.current = [];
+      }
+    }); // Continue bubbling if parent exist
+
+    onCollectionResize === null || onCollectionResize === void 0 ? void 0 : onCollectionResize(size, element, data);
+  }, [onBatchResize, onCollectionResize]);
+  return /*#__PURE__*/React.createElement(CollectionContext.Provider, {
+    value: onResize
+  }, children);
+}
+
+function SingleObserver(props) {
+  var children = props.children,
+      disabled = props.disabled;
+  var elementRef = React.useRef(null);
+  var wrapperRef = React.useRef(null);
+  var onCollectionResize = React.useContext(CollectionContext); // =========================== Children ===========================
+
+  var isRenderProps = typeof children === 'function';
+  var mergedChildren = isRenderProps ? children(elementRef) : children; // ============================= Size =============================
+
+  var sizeRef = React.useRef({
+    width: -1,
+    height: -1,
+    offsetWidth: -1,
+    offsetHeight: -1
+  }); // ============================= Ref ==============================
+
+  var canRef = !isRenderProps && /*#__PURE__*/React.isValidElement(mergedChildren) && supportRef(mergedChildren);
+  var originRef = canRef ? mergedChildren.ref : null;
+  var mergedRef = React.useMemo(function () {
+    return composeRef(originRef, elementRef);
+  }, [originRef, elementRef]); // =========================== Observe ============================
+
+  var propsRef = React.useRef(props);
+  propsRef.current = props; // Handler
+
+  var onInternalResize = React.useCallback(function (target) {
+    var _propsRef$current = propsRef.current,
+        onResize = _propsRef$current.onResize,
+        data = _propsRef$current.data;
+
+    var _target$getBoundingCl = target.getBoundingClientRect(),
+        width = _target$getBoundingCl.width,
+        height = _target$getBoundingCl.height;
+
+    var offsetWidth = target.offsetWidth,
+        offsetHeight = target.offsetHeight;
+    /**
+     * Resize observer trigger when content size changed.
+     * In most case we just care about element size,
+     * let's use `boundary` instead of `contentRect` here to avoid shaking.
+     */
+
+    var fixedWidth = Math.floor(width);
+    var fixedHeight = Math.floor(height);
+
+    if (sizeRef.current.width !== fixedWidth || sizeRef.current.height !== fixedHeight || sizeRef.current.offsetWidth !== offsetWidth || sizeRef.current.offsetHeight !== offsetHeight) {
+      var size = {
+        width: fixedWidth,
+        height: fixedHeight,
+        offsetWidth: offsetWidth,
+        offsetHeight: offsetHeight
+      };
+      sizeRef.current = size; // IE is strange, right?
+
+      var mergedOffsetWidth = offsetWidth === Math.round(width) ? width : offsetWidth;
+      var mergedOffsetHeight = offsetHeight === Math.round(height) ? height : offsetHeight;
+
+      var sizeInfo = _objectSpread2(_objectSpread2({}, size), {}, {
+        offsetWidth: mergedOffsetWidth,
+        offsetHeight: mergedOffsetHeight
+      }); // Let collection know what happened
+
+
+      onCollectionResize === null || onCollectionResize === void 0 ? void 0 : onCollectionResize(sizeInfo, target, data);
+
+      if (onResize) {
+        // defer the callback but not defer to next frame
+        Promise.resolve().then(function () {
+          onResize(sizeInfo, target);
+        });
+      }
+    }
+  }, []); // Dynamic observe
+
+  React.useEffect(function () {
+    var currentElement = findDOMNode(elementRef.current) || findDOMNode(wrapperRef.current);
+
+    if (currentElement && !disabled) {
+      observe(currentElement, onInternalResize);
+    }
+
+    return function () {
+      return unobserve(currentElement, onInternalResize);
+    };
+  }, [elementRef.current, disabled]); // ============================ Render ============================
+
+  return /*#__PURE__*/React.createElement(DomWrapper$1, {
+    ref: wrapperRef
+  }, canRef ? /*#__PURE__*/React.cloneElement(mergedChildren, {
+    ref: mergedRef
+  }) : mergedChildren);
+}
+
+var INTERNAL_PREFIX_KEY = 'rc-observer-key';
+
+function ResizeObserver(props) {
+  var children = props.children;
+  var childNodes = typeof children === 'function' ? [children] : toArray$1(children);
+
+  {
+    if (childNodes.length > 1) {
+      warning$2(false, 'Find more than one child node with `children` in ResizeObserver. Please use ResizeObserver.Collection instead.');
+    } else if (childNodes.length === 0) {
+      warning$2(false, '`children` of ResizeObserver is empty. Nothing is in observe.');
+    }
+  }
+
+  return childNodes.map(function (child, index) {
+    var key = (child === null || child === void 0 ? void 0 : child.key) || "".concat(INTERNAL_PREFIX_KEY, "-").concat(index);
+    return /*#__PURE__*/React.createElement(SingleObserver, _extends$2({}, props, {
+      key: key
+    }), child);
+  });
+}
+
+ResizeObserver.Collection = Collection;
+
 var IconContext = /*#__PURE__*/createContext({});
 var IconContext$1 = IconContext;
 
@@ -371,7 +1514,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties(source, excluded) {
+function _objectWithoutProperties$1(source, excluded) {
   if (source == null) return {};
   var target = _objectWithoutPropertiesLoose(source, excluded);
   var key, i;
@@ -1265,8 +2408,8 @@ function _asyncToGenerator(fn) {
   };
 }
 
-function _extends() {
-  _extends = Object.assign || function (target) {
+function _extends$1() {
+  _extends$1 = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
 
@@ -1280,7 +2423,7 @@ function _extends() {
     return target;
   };
 
-  return _extends.apply(this, arguments);
+  return _extends$1.apply(this, arguments);
 }
 
 function _inheritsLoose(subClass, superClass) {
@@ -1636,7 +2779,7 @@ function deepMerge(target, source) {
         var value = source[s];
 
         if (typeof value === 'object' && typeof target[s] === 'object') {
-          target[s] = _extends({}, target[s], value);
+          target[s] = _extends$1({}, target[s], value);
         } else {
           target[s] = value;
         }
@@ -2331,7 +3474,7 @@ var Schema = /*#__PURE__*/function () {
 
         if (typeof rule.transform === 'function') {
           if (source === source_) {
-            source = _extends({}, source);
+            source = _extends$1({}, source);
           }
 
           value = source[z] = rule.transform(value);
@@ -2342,7 +3485,7 @@ var Schema = /*#__PURE__*/function () {
             validator: rule
           };
         } else {
-          rule = _extends({}, rule);
+          rule = _extends$1({}, rule);
         } // Fill validator. Skip if nothing need to validate
 
 
@@ -2372,7 +3515,7 @@ var Schema = /*#__PURE__*/function () {
       rule.field = data.field;
 
       function addFullField(key, schema) {
-        return _extends({}, schema, {
+        return _extends$1({}, schema, {
           fullField: rule.fullField + "." + key,
           fullFields: rule.fullFields ? [].concat(rule.fullFields, [key]) : [key]
         });
@@ -2425,7 +3568,7 @@ var Schema = /*#__PURE__*/function () {
             });
           }
 
-          fieldsSchema = _extends({}, fieldsSchema, data.rule.fields);
+          fieldsSchema = _extends$1({}, fieldsSchema, data.rule.fields);
           var paredFieldsSchema = {};
           Object.keys(fieldsSchema).forEach(function (field) {
             var fieldSchema = fieldsSchema[field];
@@ -2837,13 +3980,13 @@ function _validateRule() {
               delete cloneRule.defaultField;
             }
 
-            validator = new AsyncValidator(_defineProperty({}, name, [cloneRule]));
+            validator = new AsyncValidator(_defineProperty$1({}, name, [cloneRule]));
             messages = setValues({}, defaultValidateMessages, options.validateMessages);
             validator.messages(messages);
             result = [];
             _context2.prev = 8;
             _context2.next = 11;
-            return Promise.resolve(validator.validate(_defineProperty({}, name, value), _objectSpread2({}, options)));
+            return Promise.resolve(validator.validate(_defineProperty$1({}, name, value), _objectSpread2({}, options)));
 
           case 11:
             _context2.next = 16;
@@ -3127,7 +4270,7 @@ function _finishOnFirstFailed() {
   return _finishOnFirstFailed.apply(this, arguments);
 }
 
-var _excluded$4 = ["name"];
+var _excluded$5 = ["name"];
 var EMPTY_ERRORS = [];
 
 function requireUpdate(shouldUpdate, prev, next, prevValue, nextValue, info) {
@@ -3580,7 +4723,7 @@ var Field = /*#__PURE__*/function (_React$Component) {
       var value = _this.getValue();
 
       var mergedGetValueProps = getValueProps || function (val) {
-        return _defineProperty({}, valuePropName, val);
+        return _defineProperty$1({}, valuePropName, val);
       }; // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
 
@@ -3737,7 +4880,7 @@ Field.defaultProps = {
 
 function WrapperField(_ref5) {
   var name = _ref5.name,
-      restProps = _objectWithoutProperties(_ref5, _excluded$4);
+      restProps = _objectWithoutProperties$1(_ref5, _excluded$5);
 
   var fieldContext = React.useContext(Context);
   var namePath = name !== undefined ? getNamePath(name) : undefined;
@@ -3753,7 +4896,7 @@ function WrapperField(_ref5) {
     warningOnce(false, '`preserve` should not apply on Form.List fields.');
   }
 
-  return /*#__PURE__*/React.createElement(Field, _extends$1({
+  return /*#__PURE__*/React.createElement(Field, _extends$2({
     key: key,
     name: namePath
   }, restProps, {
@@ -3945,7 +5088,7 @@ function _iterableToArrayLimit(arr, i) {
   return _arr;
 }
 
-function _slicedToArray(arr, i) {
+function _slicedToArray$1(arr, i) {
   return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
 }
 
@@ -4036,7 +5179,7 @@ var NameMap = /*#__PURE__*/function () {
     key: "map",
     value: function map(callback) {
       return _toConsumableArray(this.kvs.entries()).map(function (_ref) {
-        var _ref2 = _slicedToArray(_ref, 2),
+        var _ref2 = _slicedToArray$1(_ref, 2),
             key = _ref2[0],
             value = _ref2[1];
 
@@ -4044,7 +5187,7 @@ var NameMap = /*#__PURE__*/function () {
         return callback({
           key: cells.map(function (cell) {
             var _cell$match = cell.match(/^([^:]*):(.*)$/),
-                _cell$match2 = _slicedToArray(_cell$match, 3),
+                _cell$match2 = _slicedToArray$1(_cell$match, 3),
                 type = _cell$match2[1],
                 unit = _cell$match2[2];
 
@@ -4071,7 +5214,7 @@ var NameMap = /*#__PURE__*/function () {
   return NameMap;
 }();
 
-var _excluded$3 = ["name", "errors"];
+var _excluded$4 = ["name", "errors"];
 var FormStore = /*#__PURE__*/_createClass(function FormStore(forceRootUpdate) {
   var _this = this;
 
@@ -4507,7 +5650,7 @@ var FormStore = /*#__PURE__*/_createClass(function FormStore(forceRootUpdate) {
     fields.forEach(function (fieldData) {
       var name = fieldData.name;
           fieldData.errors;
-          var data = _objectWithoutProperties(fieldData, _excluded$3);
+          var data = _objectWithoutProperties$1(fieldData, _excluded$4);
 
       var namePath = getNamePath(name); // Value
 
@@ -4922,7 +6065,7 @@ function useForm(form) {
   var formRef = React.useRef();
 
   var _React$useState = React.useState({}),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
+      _React$useState2 = _slicedToArray$1(_React$useState, 2),
       forceUpdate = _React$useState2[1];
 
   if (!formRef.current) {
@@ -4984,7 +6127,7 @@ var FormProvider = function FormProvider(_ref) {
       },
       registerForm: function registerForm(name, form) {
         if (name) {
-          formsRef.current = _objectSpread2(_objectSpread2({}, formsRef.current), {}, _defineProperty({}, name, form));
+          formsRef.current = _objectSpread2(_objectSpread2({}, formsRef.current), {}, _defineProperty$1({}, name, form));
         }
 
         formContext.registerForm(name, form);
@@ -5000,7 +6143,7 @@ var FormProvider = function FormProvider(_ref) {
   }, children);
 };
 
-var _excluded$2 = ["name", "initialValues", "fields", "form", "preserve", "children", "component", "validateMessages", "validateTrigger", "onValuesChange", "onFieldsChange", "onFinish", "onFinishFailed"];
+var _excluded$3 = ["name", "initialValues", "fields", "form", "preserve", "children", "component", "validateMessages", "validateTrigger", "onValuesChange", "onFieldsChange", "onFinish", "onFinishFailed"];
 
 var Form = function Form(_ref, ref) {
   var name = _ref.name,
@@ -5018,13 +6161,13 @@ var Form = function Form(_ref, ref) {
       _onFieldsChange = _ref.onFieldsChange,
       _onFinish = _ref.onFinish,
       onFinishFailed = _ref.onFinishFailed,
-      restProps = _objectWithoutProperties(_ref, _excluded$2);
+      restProps = _objectWithoutProperties$1(_ref, _excluded$3);
 
   var formContext = React.useContext(FormContext); // We customize handle event since Context will makes all the consumer re-render:
   // https://reactjs.org/docs/context.html#contextprovider
 
   var _useForm = useForm(form),
-      _useForm2 = _slicedToArray(_useForm, 1),
+      _useForm2 = _slicedToArray$1(_useForm, 1),
       formInstance = _useForm2[0];
 
   var _formInstance$getInte = formInstance.getInternalHooks(HOOK_MARK),
@@ -5111,7 +6254,7 @@ var Form = function Form(_ref, ref) {
     return wrapperNode;
   }
 
-  return /*#__PURE__*/React.createElement(Component, _extends$1({}, restProps, {
+  return /*#__PURE__*/React.createElement(Component, _extends$2({}, restProps, {
     onSubmit: function onSubmit(event) {
       event.preventDefault();
       event.stopPropagation();
@@ -5191,7 +6334,7 @@ var locale$1 = {
 var TimePicker = locale$1;
 
 var locale = {
-  lang: _extends$1({
+  lang: _extends$2({
     placeholder: 'Select date',
     yearPlaceholder: 'Select year',
     quarterPlaceholder: 'Select quarter',
@@ -5202,7 +6345,7 @@ var locale = {
     rangeMonthPlaceholder: ['Start month', 'End month'],
     rangeWeekPlaceholder: ['Start week', 'End week']
   }, locale$2),
-  timePickerLocale: _extends$1({}, TimePicker)
+  timePickerLocale: _extends$2({}, TimePicker)
 }; // All settings at:
 // https://github.com/ant-design/ant-design/blob/master/components/date-picker/locale/example.json
 
@@ -5360,7 +6503,7 @@ var LocaleReceiver = /*#__PURE__*/function (_React$Component) {
       var locale = defaultLocale$1 || defaultLocale[componentName !== null && componentName !== void 0 ? componentName : 'global'];
       var antLocale = this.context;
       var localeFromContext = componentName && antLocale ? antLocale[componentName] : {};
-      return _extends$1(_extends$1({}, locale instanceof Function ? locale() : locale), localeFromContext || {});
+      return _extends$2(_extends$2({}, locale instanceof Function ? locale() : locale), localeFromContext || {});
     }
   }, {
     key: "getLocaleCode",
@@ -5475,7 +6618,7 @@ var Simple = function Simple() {
 
 var SimpleEmptyImg = Simple;
 
-var __rest$2 = undefined && undefined.__rest || function (s, e) {
+var __rest$5 = undefined && undefined.__rest || function (s, e) {
   var t = {};
 
   for (var p in s) {
@@ -5498,7 +6641,7 @@ var Empty = function Empty(_a) {
       description = _a.description,
       children = _a.children,
       imageStyle = _a.imageStyle,
-      restProps = __rest$2(_a, ["className", "prefixCls", "image", "description", "children", "imageStyle"]);
+      restProps = __rest$5(_a, ["className", "prefixCls", "image", "description", "children", "imageStyle"]);
 
   var _React$useContext = React.useContext(ConfigContext),
       getPrefixCls = _React$useContext.getPrefixCls,
@@ -5523,8 +6666,8 @@ var Empty = function Empty(_a) {
       imageNode = image;
     }
 
-    return /*#__PURE__*/React.createElement("div", _extends$1({
-      className: classnames(prefixCls, (_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-normal"), image === simpleEmptyImg), _defineProperty(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _classNames), className)
+    return /*#__PURE__*/React.createElement("div", _extends$2({
+      className: classnames(prefixCls, (_classNames = {}, _defineProperty$1(_classNames, "".concat(prefixCls, "-normal"), image === simpleEmptyImg), _defineProperty$1(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _classNames), className)
     }, restProps), /*#__PURE__*/React.createElement("div", {
       className: "".concat(prefixCls, "-image"),
       style: imageStyle
@@ -5684,7 +6827,7 @@ function useMountStatus(defaultValue) {
   var destroyRef = useRef(false);
 
   var _useState = useState(defaultValue),
-      _useState2 = _slicedToArray(_useState, 2),
+      _useState2 = _slicedToArray$1(_useState, 2),
       val = _useState2[0],
       setVal = _useState2[1];
 
@@ -5804,12 +6947,12 @@ function isActive(step) {
 }
 var useStepQueue = (function (status, callback) {
   var _React$useState = React.useState(STEP_NONE),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
+      _React$useState2 = _slicedToArray$1(_React$useState, 2),
       step = _React$useState2[0],
       setStep = _React$useState2[1];
 
   var _useNextFrame = useNextFrame(),
-      _useNextFrame2 = _slicedToArray(_useNextFrame, 2),
+      _useNextFrame2 = _slicedToArray$1(_useNextFrame, 2),
       nextFrame = _useNextFrame2[0],
       cancelNextFrame = _useNextFrame2[1];
 
@@ -5918,17 +7061,17 @@ function useStatus(supportMotion, visible, getElement, _ref) {
 
   // Used for outer render usage to avoid `visible: false & status: none` to render nothing
   var _useState = useMountStatus(),
-      _useState2 = _slicedToArray(_useState, 2),
+      _useState2 = _slicedToArray$1(_useState, 2),
       asyncVisible = _useState2[0],
       setAsyncVisible = _useState2[1];
 
   var _useState3 = useMountStatus(STATUS_NONE),
-      _useState4 = _slicedToArray(_useState3, 2),
+      _useState4 = _slicedToArray$1(_useState3, 2),
       status = _useState4[0],
       setStatus = _useState4[1];
 
   var _useState5 = useMountStatus(null),
-      _useState6 = _slicedToArray(_useState5, 2),
+      _useState6 = _slicedToArray$1(_useState5, 2),
       style = _useState6[0],
       setStyle = _useState6[1];
 
@@ -5974,7 +7117,7 @@ function useStatus(supportMotion, visible, getElement, _ref) {
   }
 
   var _useDomMotionEvents = useDomMotionEvents(onInternalMotionEnd),
-      _useDomMotionEvents2 = _slicedToArray(_useDomMotionEvents, 1),
+      _useDomMotionEvents2 = _slicedToArray$1(_useDomMotionEvents, 1),
       patchMotionEvents = _useDomMotionEvents2[0]; // ============================= Step =============================
 
 
@@ -5983,13 +7126,13 @@ function useStatus(supportMotion, visible, getElement, _ref) {
 
     switch (status) {
       case 'appear':
-        return _ref2 = {}, _defineProperty(_ref2, STEP_PREPARE, onAppearPrepare), _defineProperty(_ref2, STEP_START, onAppearStart), _defineProperty(_ref2, STEP_ACTIVE, onAppearActive), _ref2;
+        return _ref2 = {}, _defineProperty$1(_ref2, STEP_PREPARE, onAppearPrepare), _defineProperty$1(_ref2, STEP_START, onAppearStart), _defineProperty$1(_ref2, STEP_ACTIVE, onAppearActive), _ref2;
 
       case 'enter':
-        return _ref3 = {}, _defineProperty(_ref3, STEP_PREPARE, onEnterPrepare), _defineProperty(_ref3, STEP_START, onEnterStart), _defineProperty(_ref3, STEP_ACTIVE, onEnterActive), _ref3;
+        return _ref3 = {}, _defineProperty$1(_ref3, STEP_PREPARE, onEnterPrepare), _defineProperty$1(_ref3, STEP_START, onEnterStart), _defineProperty$1(_ref3, STEP_ACTIVE, onEnterActive), _ref3;
 
       case 'leave':
-        return _ref4 = {}, _defineProperty(_ref4, STEP_PREPARE, onLeavePrepare), _defineProperty(_ref4, STEP_START, onLeaveStart), _defineProperty(_ref4, STEP_ACTIVE, onLeaveActive), _ref4;
+        return _ref4 = {}, _defineProperty$1(_ref4, STEP_PREPARE, onLeavePrepare), _defineProperty$1(_ref4, STEP_START, onLeaveStart), _defineProperty$1(_ref4, STEP_ACTIVE, onLeaveActive), _ref4;
 
       default:
         return {};
@@ -6032,7 +7175,7 @@ function useStatus(supportMotion, visible, getElement, _ref) {
 
     return DoStep;
   }),
-      _useStepQueue2 = _slicedToArray(_useStepQueue, 2),
+      _useStepQueue2 = _slicedToArray$1(_useStepQueue, 2),
       startStep = _useStepQueue2[0],
       step = _useStepQueue2[1];
 
@@ -6168,7 +7311,7 @@ function genCSSMotion(config) {
     }
 
     var _useStatus = useStatus(supportMotion, visible, getDomElement, props),
-        _useStatus2 = _slicedToArray(_useStatus, 4),
+        _useStatus2 = _slicedToArray$1(_useStatus, 4),
         status = _useStatus2[0],
         statusStep = _useStatus2[1],
         statusStyle = _useStatus2[2],
@@ -6231,7 +7374,7 @@ function genCSSMotion(config) {
       }
 
       motionChildren = children(_objectSpread2(_objectSpread2({}, mergedProps), {}, {
-        className: classnames(getTransitionName(motionName, status), (_classNames = {}, _defineProperty(_classNames, getTransitionName(motionName, "".concat(status, "-").concat(statusSuffix)), statusSuffix), _defineProperty(_classNames, motionName, typeof motionName === 'string'), _classNames)),
+        className: classnames(getTransitionName(motionName, status), (_classNames = {}, _defineProperty$1(_classNames, getTransitionName(motionName, "".concat(status, "-").concat(statusSuffix)), statusSuffix), _defineProperty$1(_classNames, motionName, typeof motionName === 'string'), _classNames)),
         style: statusStyle
       }), setNodeRef);
     }
@@ -7185,7 +8328,7 @@ var useInsertStyles = function useInsertStyles() {
   }, []);
 };
 
-var _excluded$1 = ["icon", "className", "onClick", "style", "primaryColor", "secondaryColor"];
+var _excluded$2 = ["icon", "className", "onClick", "style", "primaryColor", "secondaryColor"];
 var twoToneColorPalette = {
   primaryColor: '#333',
   secondaryColor: '#E6E6E6',
@@ -7211,7 +8354,7 @@ var IconBase = function IconBase(props) {
       style = props.style,
       primaryColor = props.primaryColor,
       secondaryColor = props.secondaryColor,
-      restProps = _objectWithoutProperties(props, _excluded$1);
+      restProps = _objectWithoutProperties$1(props, _excluded$2);
 
   var colors = twoToneColorPalette;
 
@@ -7256,7 +8399,7 @@ var ReactIcon = IconBase;
 
 function setTwoToneColor(twoToneColor) {
   var _normalizeTwoToneColo = normalizeTwoToneColors(twoToneColor),
-      _normalizeTwoToneColo2 = _slicedToArray(_normalizeTwoToneColo, 2),
+      _normalizeTwoToneColo2 = _slicedToArray$1(_normalizeTwoToneColo, 2),
       primaryColor = _normalizeTwoToneColo2[0],
       secondaryColor = _normalizeTwoToneColo2[1];
 
@@ -7275,7 +8418,7 @@ function getTwoToneColor() {
   return [colors.primaryColor, colors.secondaryColor];
 }
 
-var _excluded = ["className", "icon", "spin", "rotate", "tabIndex", "onClick", "twoToneColor"];
+var _excluded$1 = ["className", "icon", "spin", "rotate", "tabIndex", "onClick", "twoToneColor"];
 // should move it to antd main repo?
 
 setTwoToneColor('#1890ff');
@@ -7289,13 +8432,13 @@ var Icon = /*#__PURE__*/React.forwardRef(function (props, ref) {
       tabIndex = props.tabIndex,
       onClick = props.onClick,
       twoToneColor = props.twoToneColor,
-      restProps = _objectWithoutProperties(props, _excluded);
+      restProps = _objectWithoutProperties$1(props, _excluded$1);
 
   var _React$useContext = React.useContext(IconContext$1),
       _React$useContext$pre = _React$useContext.prefixCls,
       prefixCls = _React$useContext$pre === void 0 ? 'anticon' : _React$useContext$pre;
 
-  var classString = classnames(prefixCls, (_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-").concat(icon.name), !!icon.name), _defineProperty(_classNames, "".concat(prefixCls, "-spin"), !!spin || icon.name === 'loading'), _classNames), className);
+  var classString = classnames(prefixCls, (_classNames = {}, _defineProperty$1(_classNames, "".concat(prefixCls, "-").concat(icon.name), !!icon.name), _defineProperty$1(_classNames, "".concat(prefixCls, "-spin"), !!spin || icon.name === 'loading'), _classNames), className);
   var iconTabIndex = tabIndex;
 
   if (iconTabIndex === undefined && onClick) {
@@ -7308,7 +8451,7 @@ var Icon = /*#__PURE__*/React.forwardRef(function (props, ref) {
   } : undefined;
 
   var _normalizeTwoToneColo = normalizeTwoToneColors(twoToneColor),
-      _normalizeTwoToneColo2 = _slicedToArray(_normalizeTwoToneColo, 2),
+      _normalizeTwoToneColo2 = _slicedToArray$1(_normalizeTwoToneColo, 2),
       primaryColor = _normalizeTwoToneColo2[0],
       secondaryColor = _normalizeTwoToneColo2[1];
 
@@ -7342,6 +8485,87 @@ var LoadingOutlined = function LoadingOutlined(props, ref) {
 LoadingOutlined.displayName = 'LoadingOutlined';
 var LoadingOutlined$1 = /*#__PURE__*/React.forwardRef(LoadingOutlined);
 
+// This icon file is generated automatically.
+var CloseCircleFilled$2 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z" } }] }, "name": "close-circle", "theme": "filled" };
+var CloseCircleFilledSvg = CloseCircleFilled$2;
+
+var CloseCircleFilled = function CloseCircleFilled(props, ref) {
+  return /*#__PURE__*/React.createElement(AntdIcon, _objectSpread2(_objectSpread2({}, props), {}, {
+    ref: ref,
+    icon: CloseCircleFilledSvg
+  }));
+};
+
+CloseCircleFilled.displayName = 'CloseCircleFilled';
+var CloseCircleFilled$1 = /*#__PURE__*/React.forwardRef(CloseCircleFilled);
+
+function useControlledState(defaultStateValue, option) {
+  var _ref = option || {},
+      defaultValue = _ref.defaultValue,
+      value = _ref.value,
+      onChange = _ref.onChange,
+      postState = _ref.postState;
+
+  var _React$useState = React.useState(function () {
+    if (value !== undefined) {
+      return value;
+    }
+
+    if (defaultValue !== undefined) {
+      return typeof defaultValue === 'function' ? defaultValue() : defaultValue;
+    }
+
+    return typeof defaultStateValue === 'function' ? defaultStateValue() : defaultStateValue;
+  }),
+      _React$useState2 = _slicedToArray$1(_React$useState, 2),
+      innerValue = _React$useState2[0],
+      setInnerValue = _React$useState2[1];
+
+  var mergedValue = value !== undefined ? value : innerValue;
+
+  if (postState) {
+    mergedValue = postState(mergedValue);
+  } // setState
+
+
+  var onChangeRef = React.useRef(onChange);
+  onChangeRef.current = onChange;
+  var triggerChange = React.useCallback(function (newValue) {
+    setInnerValue(newValue);
+
+    if (mergedValue !== newValue && onChangeRef.current) {
+      onChangeRef.current(newValue, mergedValue);
+    }
+  }, [mergedValue, onChangeRef]); // Effect of reset value to `undefined`
+
+  var firstRenderRef = React.useRef(true);
+  React.useEffect(function () {
+    if (firstRenderRef.current) {
+      firstRenderRef.current = false;
+      return;
+    }
+
+    if (value === undefined) {
+      setInnerValue(value);
+    }
+  }, [value]);
+  return [mergedValue, triggerChange];
+}
+
+// This icon file is generated automatically.
+var SearchOutlined$2 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z" } }] }, "name": "search", "theme": "outlined" };
+var SearchOutlinedSvg = SearchOutlined$2;
+
+var SearchOutlined = function SearchOutlined(props, ref) {
+  return /*#__PURE__*/React.createElement(AntdIcon, _objectSpread2(_objectSpread2({}, props), {}, {
+    ref: ref,
+    icon: SearchOutlinedSvg
+  }));
+};
+
+SearchOutlined.displayName = 'SearchOutlined';
+var SearchOutlined$1 = /*#__PURE__*/React.forwardRef(SearchOutlined);
+
 var isValidElement = React.isValidElement;
 function replaceElement(element, replacement, props) {
   if (!isValidElement(element)) return replacement;
@@ -7366,7 +8590,7 @@ var UnreachableException = /*#__PURE__*/_createClass(function UnreachableExcepti
   this.error = new Error("unreachable case: ".concat(JSON.stringify(value)));
 });
 
-var __rest$1 = undefined && undefined.__rest || function (s, e) {
+var __rest$4 = undefined && undefined.__rest || function (s, e) {
   var t = {};
 
   for (var p in s) {
@@ -7389,7 +8613,7 @@ var ButtonGroup = function ButtonGroup(props) {
     var customizePrefixCls = props.prefixCls,
         size = props.size,
         className = props.className,
-        others = __rest$1(props, ["prefixCls", "size", "className"]);
+        others = __rest$4(props, ["prefixCls", "size", "className"]);
 
     var prefixCls = getPrefixCls('btn-group', customizePrefixCls); // large => lg
     // small => sm
@@ -7414,14 +8638,14 @@ var ButtonGroup = function ButtonGroup(props) {
         console.warn(new UnreachableException(size).error);
     }
 
-    var classes = classnames(prefixCls, (_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-").concat(sizeCls), sizeCls), _defineProperty(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _classNames), className);
-    return /*#__PURE__*/React.createElement("div", _extends$1({}, others, {
+    var classes = classnames(prefixCls, (_classNames = {}, _defineProperty$1(_classNames, "".concat(prefixCls, "-").concat(sizeCls), sizeCls), _defineProperty$1(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _classNames), className);
+    return /*#__PURE__*/React.createElement("div", _extends$2({}, others, {
       className: classes
     }));
   });
 };
 
-var Group = ButtonGroup;
+var Group$2 = ButtonGroup;
 
 var id = 0;
 var ids = {}; // Support call raf with delay specified frame
@@ -7729,7 +8953,7 @@ var LoadingIcon = function LoadingIcon(_ref) {
 
 var LoadingIcon$1 = LoadingIcon;
 
-var __rest = undefined && undefined.__rest || function (s, e) {
+var __rest$3 = undefined && undefined.__rest || function (s, e) {
   var t = {};
 
   for (var p in s) {
@@ -7830,17 +9054,17 @@ var InternalButton = function InternalButton(props, ref) {
       block = _props$block === void 0 ? false : _props$block,
       _props$htmlType = props.htmlType,
       htmlType = _props$htmlType === void 0 ? 'button' : _props$htmlType,
-      rest = __rest(props, ["loading", "prefixCls", "type", "danger", "shape", "size", "className", "children", "icon", "ghost", "block", "htmlType"]);
+      rest = __rest$3(props, ["loading", "prefixCls", "type", "danger", "shape", "size", "className", "children", "icon", "ghost", "block", "htmlType"]);
 
   var size = React.useContext(SizeContext$1);
 
   var _React$useState = React.useState(!!loading),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
+      _React$useState2 = _slicedToArray$1(_React$useState, 2),
       innerLoading = _React$useState2[0],
       setLoading = _React$useState2[1];
 
   var _React$useState3 = React.useState(false),
-      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      _React$useState4 = _slicedToArray$1(_React$useState3, 2),
       hasTwoCNChar = _React$useState4[0],
       setHasTwoCNChar = _React$useState4[1];
 
@@ -7914,7 +9138,7 @@ var InternalButton = function InternalButton(props, ref) {
   var sizeFullname = customizeSize || size;
   var sizeCls = sizeFullname ? sizeClassNameMap[sizeFullname] || '' : '';
   var iconType = innerLoading ? 'loading' : icon;
-  var classes = classnames(prefixCls, (_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-").concat(type), type), _defineProperty(_classNames, "".concat(prefixCls, "-").concat(shape), shape !== 'default' && shape), _defineProperty(_classNames, "".concat(prefixCls, "-").concat(sizeCls), sizeCls), _defineProperty(_classNames, "".concat(prefixCls, "-icon-only"), !children && children !== 0 && !!iconType), _defineProperty(_classNames, "".concat(prefixCls, "-background-ghost"), ghost && !isUnborderedButtonType(type)), _defineProperty(_classNames, "".concat(prefixCls, "-loading"), innerLoading), _defineProperty(_classNames, "".concat(prefixCls, "-two-chinese-chars"), hasTwoCNChar && autoInsertSpace), _defineProperty(_classNames, "".concat(prefixCls, "-block"), block), _defineProperty(_classNames, "".concat(prefixCls, "-dangerous"), !!danger), _defineProperty(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _classNames), className);
+  var classes = classnames(prefixCls, (_classNames = {}, _defineProperty$1(_classNames, "".concat(prefixCls, "-").concat(type), type), _defineProperty$1(_classNames, "".concat(prefixCls, "-").concat(shape), shape !== 'default' && shape), _defineProperty$1(_classNames, "".concat(prefixCls, "-").concat(sizeCls), sizeCls), _defineProperty$1(_classNames, "".concat(prefixCls, "-icon-only"), !children && children !== 0 && !!iconType), _defineProperty$1(_classNames, "".concat(prefixCls, "-background-ghost"), ghost && !isUnborderedButtonType(type)), _defineProperty$1(_classNames, "".concat(prefixCls, "-loading"), innerLoading), _defineProperty$1(_classNames, "".concat(prefixCls, "-two-chinese-chars"), hasTwoCNChar && autoInsertSpace), _defineProperty$1(_classNames, "".concat(prefixCls, "-block"), block), _defineProperty$1(_classNames, "".concat(prefixCls, "-dangerous"), !!danger), _defineProperty$1(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _classNames), className);
   var iconNode = icon && !innerLoading ? icon : /*#__PURE__*/React.createElement(LoadingIcon$1, {
     existIcon: !!icon,
     prefixCls: prefixCls,
@@ -7924,14 +9148,14 @@ var InternalButton = function InternalButton(props, ref) {
   var linkButtonRestProps = omit(rest, ['navigate']);
 
   if (linkButtonRestProps.href !== undefined) {
-    return /*#__PURE__*/React.createElement("a", _extends$1({}, linkButtonRestProps, {
+    return /*#__PURE__*/React.createElement("a", _extends$2({}, linkButtonRestProps, {
       className: classes,
       onClick: handleClick,
       ref: buttonRef
     }), iconNode, kids);
   }
 
-  var buttonNode = /*#__PURE__*/React.createElement("button", _extends$1({}, rest, {
+  var buttonNode = /*#__PURE__*/React.createElement("button", _extends$2({}, rest, {
     type: htmlType,
     className: classes,
     onClick: handleClick,
@@ -7949,9 +9173,1457 @@ var InternalButton = function InternalButton(props, ref) {
 
 var Button$1 = /*#__PURE__*/React.forwardRef(InternalButton);
 Button$1.displayName = 'Button';
-Button$1.Group = Group;
+Button$1.Group = Group$2;
 Button$1.__ANT_BUTTON = true;
 var Button$2 = Button$1;
+
+//
+
+var shallowequal = function shallowEqual(objA, objB, compare, compareContext) {
+  var ret = compare ? compare.call(compareContext, objA, objB) : void 0;
+
+  if (ret !== void 0) {
+    return !!ret;
+  }
+
+  if (objA === objB) {
+    return true;
+  }
+
+  if (typeof objA !== "object" || !objA || typeof objB !== "object" || !objB) {
+    return false;
+  }
+
+  var keysA = Object.keys(objA);
+  var keysB = Object.keys(objB);
+
+  if (keysA.length !== keysB.length) {
+    return false;
+  }
+
+  var bHasOwnProperty = Object.prototype.hasOwnProperty.bind(objB);
+
+  // Test for A's keys different from B.
+  for (var idx = 0; idx < keysA.length; idx++) {
+    var key = keysA[idx];
+
+    if (!bHasOwnProperty(key)) {
+      return false;
+    }
+
+    var valueA = objA[key];
+    var valueB = objB[key];
+
+    ret = compare ? compare.call(compareContext, valueA, valueB, key) : void 0;
+
+    if (ret === false || (ret === void 0 && valueA !== valueB)) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+function getInputClassName(prefixCls, bordered, size, disabled, direction) {
+  var _classNames;
+
+  return classnames(prefixCls, (_classNames = {}, _defineProperty$1(_classNames, "".concat(prefixCls, "-sm"), size === 'small'), _defineProperty$1(_classNames, "".concat(prefixCls, "-lg"), size === 'large'), _defineProperty$1(_classNames, "".concat(prefixCls, "-disabled"), disabled), _defineProperty$1(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _defineProperty$1(_classNames, "".concat(prefixCls, "-borderless"), !bordered), _classNames));
+}
+function hasPrefixSuffix(props) {
+  return !!(props.prefix || props.suffix || props.allowClear);
+}
+
+var ClearableInputType = tuple('text', 'input');
+
+function hasAddon(props) {
+  return !!(props.addonBefore || props.addonAfter);
+}
+
+var ClearableLabeledInput = /*#__PURE__*/function (_React$Component) {
+  _inherits(ClearableLabeledInput, _React$Component);
+
+  var _super = _createSuper(ClearableLabeledInput);
+
+  function ClearableLabeledInput() {
+    var _this;
+
+    _classCallCheck(this, ClearableLabeledInput);
+
+    _this = _super.apply(this, arguments);
+    /** @private Do Not use out of this class. We do not promise this is always keep. */
+
+    _this.containerRef = /*#__PURE__*/React.createRef();
+
+    _this.onInputMouseUp = function (e) {
+      var _a;
+
+      if ((_a = _this.containerRef.current) === null || _a === void 0 ? void 0 : _a.contains(e.target)) {
+        var triggerFocus = _this.props.triggerFocus;
+        triggerFocus === null || triggerFocus === void 0 ? void 0 : triggerFocus();
+      }
+    };
+
+    return _this;
+  }
+
+  _createClass(ClearableLabeledInput, [{
+    key: "renderClearIcon",
+    value: function renderClearIcon(prefixCls) {
+      var _classNames;
+
+      var _this$props = this.props,
+          allowClear = _this$props.allowClear,
+          value = _this$props.value,
+          disabled = _this$props.disabled,
+          readOnly = _this$props.readOnly,
+          handleReset = _this$props.handleReset,
+          suffix = _this$props.suffix;
+
+      if (!allowClear) {
+        return null;
+      }
+
+      var needClear = !disabled && !readOnly && value;
+      var className = "".concat(prefixCls, "-clear-icon");
+      return /*#__PURE__*/React.createElement(CloseCircleFilled$1, {
+        onClick: handleReset // Do not trigger onBlur when clear input
+        // https://github.com/ant-design/ant-design/issues/31200
+        ,
+        onMouseDown: function onMouseDown(e) {
+          return e.preventDefault();
+        },
+        className: classnames((_classNames = {}, _defineProperty$1(_classNames, "".concat(className, "-hidden"), !needClear), _defineProperty$1(_classNames, "".concat(className, "-has-suffix"), !!suffix), _classNames), className),
+        role: "button"
+      });
+    }
+  }, {
+    key: "renderSuffix",
+    value: function renderSuffix(prefixCls) {
+      var _this$props2 = this.props,
+          suffix = _this$props2.suffix,
+          allowClear = _this$props2.allowClear;
+
+      if (suffix || allowClear) {
+        return /*#__PURE__*/React.createElement("span", {
+          className: "".concat(prefixCls, "-suffix")
+        }, this.renderClearIcon(prefixCls), suffix);
+      }
+
+      return null;
+    }
+  }, {
+    key: "renderLabeledIcon",
+    value: function renderLabeledIcon(prefixCls, element) {
+      var _classNames2;
+
+      var _this$props3 = this.props,
+          focused = _this$props3.focused,
+          value = _this$props3.value,
+          prefix = _this$props3.prefix,
+          className = _this$props3.className,
+          size = _this$props3.size,
+          suffix = _this$props3.suffix,
+          disabled = _this$props3.disabled,
+          allowClear = _this$props3.allowClear,
+          direction = _this$props3.direction,
+          style = _this$props3.style,
+          readOnly = _this$props3.readOnly,
+          bordered = _this$props3.bordered;
+
+      if (!hasPrefixSuffix(this.props)) {
+        return cloneElement(element, {
+          value: value
+        });
+      }
+
+      var suffixNode = this.renderSuffix(prefixCls);
+      var prefixNode = prefix ? /*#__PURE__*/React.createElement("span", {
+        className: "".concat(prefixCls, "-prefix")
+      }, prefix) : null;
+      var affixWrapperCls = classnames("".concat(prefixCls, "-affix-wrapper"), (_classNames2 = {}, _defineProperty$1(_classNames2, "".concat(prefixCls, "-affix-wrapper-focused"), focused), _defineProperty$1(_classNames2, "".concat(prefixCls, "-affix-wrapper-disabled"), disabled), _defineProperty$1(_classNames2, "".concat(prefixCls, "-affix-wrapper-sm"), size === 'small'), _defineProperty$1(_classNames2, "".concat(prefixCls, "-affix-wrapper-lg"), size === 'large'), _defineProperty$1(_classNames2, "".concat(prefixCls, "-affix-wrapper-input-with-clear-btn"), suffix && allowClear && value), _defineProperty$1(_classNames2, "".concat(prefixCls, "-affix-wrapper-rtl"), direction === 'rtl'), _defineProperty$1(_classNames2, "".concat(prefixCls, "-affix-wrapper-readonly"), readOnly), _defineProperty$1(_classNames2, "".concat(prefixCls, "-affix-wrapper-borderless"), !bordered), _defineProperty$1(_classNames2, "".concat(className), !hasAddon(this.props) && className), _classNames2));
+      return /*#__PURE__*/React.createElement("span", {
+        ref: this.containerRef,
+        className: affixWrapperCls,
+        style: style,
+        onMouseUp: this.onInputMouseUp
+      }, prefixNode, cloneElement(element, {
+        style: null,
+        value: value,
+        className: getInputClassName(prefixCls, bordered, size, disabled)
+      }), suffixNode);
+    }
+  }, {
+    key: "renderInputWithLabel",
+    value: function renderInputWithLabel(prefixCls, labeledElement) {
+      var _classNames4;
+
+      var _this$props4 = this.props,
+          addonBefore = _this$props4.addonBefore,
+          addonAfter = _this$props4.addonAfter,
+          style = _this$props4.style,
+          size = _this$props4.size,
+          className = _this$props4.className,
+          direction = _this$props4.direction; // Not wrap when there is not addons
+
+      if (!hasAddon(this.props)) {
+        return labeledElement;
+      }
+
+      var wrapperClassName = "".concat(prefixCls, "-group");
+      var addonClassName = "".concat(wrapperClassName, "-addon");
+      var addonBeforeNode = addonBefore ? /*#__PURE__*/React.createElement("span", {
+        className: addonClassName
+      }, addonBefore) : null;
+      var addonAfterNode = addonAfter ? /*#__PURE__*/React.createElement("span", {
+        className: addonClassName
+      }, addonAfter) : null;
+      var mergedWrapperClassName = classnames("".concat(prefixCls, "-wrapper"), wrapperClassName, _defineProperty$1({}, "".concat(wrapperClassName, "-rtl"), direction === 'rtl'));
+      var mergedGroupClassName = classnames("".concat(prefixCls, "-group-wrapper"), (_classNames4 = {}, _defineProperty$1(_classNames4, "".concat(prefixCls, "-group-wrapper-sm"), size === 'small'), _defineProperty$1(_classNames4, "".concat(prefixCls, "-group-wrapper-lg"), size === 'large'), _defineProperty$1(_classNames4, "".concat(prefixCls, "-group-wrapper-rtl"), direction === 'rtl'), _classNames4), className); // Need another wrapper for changing display:table to display:inline-block
+      // and put style prop in wrapper
+
+      return /*#__PURE__*/React.createElement("span", {
+        className: mergedGroupClassName,
+        style: style
+      }, /*#__PURE__*/React.createElement("span", {
+        className: mergedWrapperClassName
+      }, addonBeforeNode, cloneElement(labeledElement, {
+        style: null
+      }), addonAfterNode));
+    }
+  }, {
+    key: "renderTextAreaWithClearIcon",
+    value: function renderTextAreaWithClearIcon(prefixCls, element) {
+      var _classNames5;
+
+      var _this$props5 = this.props,
+          value = _this$props5.value,
+          allowClear = _this$props5.allowClear,
+          className = _this$props5.className,
+          style = _this$props5.style,
+          direction = _this$props5.direction,
+          bordered = _this$props5.bordered;
+
+      if (!allowClear) {
+        return cloneElement(element, {
+          value: value
+        });
+      }
+
+      var affixWrapperCls = classnames("".concat(prefixCls, "-affix-wrapper"), "".concat(prefixCls, "-affix-wrapper-textarea-with-clear-btn"), (_classNames5 = {}, _defineProperty$1(_classNames5, "".concat(prefixCls, "-affix-wrapper-rtl"), direction === 'rtl'), _defineProperty$1(_classNames5, "".concat(prefixCls, "-affix-wrapper-borderless"), !bordered), _defineProperty$1(_classNames5, "".concat(className), !hasAddon(this.props) && className), _classNames5));
+      return /*#__PURE__*/React.createElement("span", {
+        className: affixWrapperCls,
+        style: style
+      }, cloneElement(element, {
+        style: null,
+        value: value
+      }), this.renderClearIcon(prefixCls));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props6 = this.props,
+          prefixCls = _this$props6.prefixCls,
+          inputType = _this$props6.inputType,
+          element = _this$props6.element;
+
+      if (inputType === ClearableInputType[0]) {
+        return this.renderTextAreaWithClearIcon(prefixCls, element);
+      }
+
+      return this.renderInputWithLabel(prefixCls, this.renderLabeledIcon(prefixCls, element));
+    }
+  }]);
+
+  return ClearableLabeledInput;
+}(React.Component);
+
+var ClearableLabeledInput$1 = ClearableLabeledInput;
+
+function fixControlledValue(value) {
+  if (typeof value === 'undefined' || value === null) {
+    return '';
+  }
+
+  return String(value);
+}
+function resolveOnChange(target, e, onChange, targetValue) {
+  if (!onChange) {
+    return;
+  }
+
+  var event = e;
+
+  if (e.type === 'click') {
+    // Clone a new target for event.
+    // Avoid the following usage, the setQuery method gets the original value.
+    //
+    // const [query, setQuery] = React.useState('');
+    // <Input
+    //   allowClear
+    //   value={query}
+    //   onChange={(e)=> {
+    //     setQuery((prevStatus) => e.target.value);
+    //   }}
+    // />
+    var currentTarget = target.cloneNode(true); // click clear icon
+
+    event = Object.create(e, {
+      target: {
+        value: currentTarget
+      },
+      currentTarget: {
+        value: currentTarget
+      }
+    });
+    currentTarget.value = '';
+    onChange(event);
+    return;
+  } // Trigger by composition event, this means we need force change the input value
+
+
+  if (targetValue !== undefined) {
+    event = Object.create(e, {
+      target: {
+        value: target
+      },
+      currentTarget: {
+        value: target
+      }
+    });
+    target.value = targetValue;
+    onChange(event);
+    return;
+  }
+
+  onChange(event);
+}
+function triggerFocus(element, option) {
+  if (!element) return;
+  element.focus(option); // Selection content
+
+  var _ref = option || {},
+      cursor = _ref.cursor;
+
+  if (cursor) {
+    var len = element.value.length;
+
+    switch (cursor) {
+      case 'start':
+        element.setSelectionRange(0, 0);
+        break;
+
+      case 'end':
+        element.setSelectionRange(len, len);
+        break;
+
+      default:
+        element.setSelectionRange(0, len);
+    }
+  }
+}
+
+var Input$1 = /*#__PURE__*/function (_React$Component) {
+  _inherits(Input, _React$Component);
+
+  var _super = _createSuper(Input);
+
+  function Input(props) {
+    var _this;
+
+    _classCallCheck(this, Input);
+
+    _this = _super.call(this, props);
+    _this.direction = 'ltr';
+
+    _this.focus = function (option) {
+      triggerFocus(_this.input, option);
+    };
+
+    _this.saveClearableInput = function (input) {
+      _this.clearableInput = input;
+    };
+
+    _this.saveInput = function (input) {
+      _this.input = input;
+    };
+
+    _this.onFocus = function (e) {
+      var onFocus = _this.props.onFocus;
+
+      _this.setState({
+        focused: true
+      }, _this.clearPasswordValueAttribute);
+
+      onFocus === null || onFocus === void 0 ? void 0 : onFocus(e);
+    };
+
+    _this.onBlur = function (e) {
+      var onBlur = _this.props.onBlur;
+
+      _this.setState({
+        focused: false
+      }, _this.clearPasswordValueAttribute);
+
+      onBlur === null || onBlur === void 0 ? void 0 : onBlur(e);
+    };
+
+    _this.handleReset = function (e) {
+      _this.setValue('', function () {
+        _this.focus();
+      });
+
+      resolveOnChange(_this.input, e, _this.props.onChange);
+    };
+
+    _this.renderInput = function (prefixCls, size, bordered) {
+      var input = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+      var _this$props = _this.props,
+          className = _this$props.className,
+          addonBefore = _this$props.addonBefore,
+          addonAfter = _this$props.addonAfter,
+          customizeSize = _this$props.size,
+          disabled = _this$props.disabled,
+          htmlSize = _this$props.htmlSize; // Fix https://fb.me/react-unknown-prop
+
+      var otherProps = omit(_this.props, ['prefixCls', 'onPressEnter', 'addonBefore', 'addonAfter', 'prefix', 'suffix', 'allowClear', // Input elements must be either controlled or uncontrolled,
+      // specify either the value prop, or the defaultValue prop, but not both.
+      'defaultValue', 'size', 'inputType', 'bordered', 'htmlSize']);
+      return /*#__PURE__*/React.createElement("input", _extends$2({
+        autoComplete: input.autoComplete
+      }, otherProps, {
+        onChange: _this.handleChange,
+        onFocus: _this.onFocus,
+        onBlur: _this.onBlur,
+        onKeyDown: _this.handleKeyDown,
+        className: classnames(getInputClassName(prefixCls, bordered, customizeSize || size, disabled, _this.direction), _defineProperty$1({}, className, className && !addonBefore && !addonAfter)),
+        ref: _this.saveInput,
+        size: htmlSize
+      }));
+    };
+
+    _this.clearPasswordValueAttribute = function () {
+      // https://github.com/ant-design/ant-design/issues/20541
+      _this.removePasswordTimeout = setTimeout(function () {
+        if (_this.input && _this.input.getAttribute('type') === 'password' && _this.input.hasAttribute('value')) {
+          _this.input.removeAttribute('value');
+        }
+      });
+    };
+
+    _this.handleChange = function (e) {
+      _this.setValue(e.target.value, _this.clearPasswordValueAttribute);
+
+      resolveOnChange(_this.input, e, _this.props.onChange);
+    };
+
+    _this.handleKeyDown = function (e) {
+      var _this$props2 = _this.props,
+          onPressEnter = _this$props2.onPressEnter,
+          onKeyDown = _this$props2.onKeyDown;
+
+      if (onPressEnter && e.keyCode === 13) {
+        onPressEnter(e);
+      }
+
+      onKeyDown === null || onKeyDown === void 0 ? void 0 : onKeyDown(e);
+    };
+
+    _this.renderShowCountSuffix = function (prefixCls) {
+      var value = _this.state.value;
+      var _this$props3 = _this.props,
+          maxLength = _this$props3.maxLength,
+          suffix = _this$props3.suffix,
+          showCount = _this$props3.showCount; // Max length value
+
+      var hasMaxLength = Number(maxLength) > 0;
+
+      if (suffix || showCount) {
+        var valueLength = _toConsumableArray(fixControlledValue(value)).length;
+
+        var dataCount = null;
+
+        if (_typeof(showCount) === 'object') {
+          dataCount = showCount.formatter({
+            count: valueLength,
+            maxLength: maxLength
+          });
+        } else {
+          dataCount = "".concat(valueLength).concat(hasMaxLength ? " / ".concat(maxLength) : '');
+        }
+
+        return /*#__PURE__*/React.createElement(React.Fragment, null, !!showCount && /*#__PURE__*/React.createElement("span", {
+          className: classnames("".concat(prefixCls, "-show-count-suffix"), _defineProperty$1({}, "".concat(prefixCls, "-show-count-has-suffix"), !!suffix))
+        }, dataCount), suffix);
+      }
+
+      return null;
+    };
+
+    _this.renderComponent = function (_ref2) {
+      var getPrefixCls = _ref2.getPrefixCls,
+          direction = _ref2.direction,
+          input = _ref2.input;
+      var _this$state = _this.state,
+          value = _this$state.value,
+          focused = _this$state.focused;
+      var _this$props4 = _this.props,
+          customizePrefixCls = _this$props4.prefixCls,
+          _this$props4$bordered = _this$props4.bordered,
+          bordered = _this$props4$bordered === void 0 ? true : _this$props4$bordered;
+      var prefixCls = getPrefixCls('input', customizePrefixCls);
+      _this.direction = direction;
+
+      var showCountSuffix = _this.renderShowCountSuffix(prefixCls);
+
+      return /*#__PURE__*/React.createElement(SizeContext$1.Consumer, null, function (size) {
+        return /*#__PURE__*/React.createElement(ClearableLabeledInput$1, _extends$2({
+          size: size
+        }, _this.props, {
+          prefixCls: prefixCls,
+          inputType: "input",
+          value: fixControlledValue(value),
+          element: _this.renderInput(prefixCls, size, bordered, input),
+          handleReset: _this.handleReset,
+          ref: _this.saveClearableInput,
+          direction: direction,
+          focused: focused,
+          triggerFocus: _this.focus,
+          bordered: bordered,
+          suffix: showCountSuffix
+        }));
+      });
+    };
+
+    var value = typeof props.value === 'undefined' ? props.defaultValue : props.value;
+    _this.state = {
+      value: value,
+      focused: false,
+      // eslint-disable-next-line react/no-unused-state
+      prevValue: props.value
+    };
+    return _this;
+  }
+
+  _createClass(Input, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.clearPasswordValueAttribute();
+    } // Since polyfill `getSnapshotBeforeUpdate` need work with `componentDidUpdate`.
+    // We keep an empty function here.
+
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {}
+  }, {
+    key: "getSnapshotBeforeUpdate",
+    value: function getSnapshotBeforeUpdate(prevProps) {
+      if (hasPrefixSuffix(prevProps) !== hasPrefixSuffix(this.props)) {
+        devWarning(this.input !== document.activeElement, 'Input', "When Input is focused, dynamic add or remove prefix / suffix will make it lose focus caused by dom structure change. Read more: https://ant.design/components/input/#FAQ");
+      }
+
+      return null;
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      if (this.removePasswordTimeout) {
+        clearTimeout(this.removePasswordTimeout);
+      }
+    }
+  }, {
+    key: "blur",
+    value: function blur() {
+      this.input.blur();
+    }
+  }, {
+    key: "setSelectionRange",
+    value: function setSelectionRange(start, end, direction) {
+      this.input.setSelectionRange(start, end, direction);
+    }
+  }, {
+    key: "select",
+    value: function select() {
+      this.input.select();
+    }
+  }, {
+    key: "setValue",
+    value: function setValue(value, callback) {
+      if (this.props.value === undefined) {
+        this.setState({
+          value: value
+        }, callback);
+      } else {
+        callback === null || callback === void 0 ? void 0 : callback();
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/React.createElement(ConfigConsumer, null, this.renderComponent);
+    }
+  }], [{
+    key: "getDerivedStateFromProps",
+    value: function getDerivedStateFromProps(nextProps, _ref3) {
+      var prevValue = _ref3.prevValue;
+      var newState = {
+        prevValue: nextProps.value
+      };
+
+      if (nextProps.value !== undefined || prevValue !== nextProps.value) {
+        newState.value = nextProps.value;
+      }
+
+      if (nextProps.disabled) {
+        newState.focused = false;
+      }
+
+      return newState;
+    }
+  }]);
+
+  return Input;
+}(React.Component);
+
+Input$1.defaultProps = {
+  type: 'text'
+};
+var Input$2 = Input$1;
+
+var Group = function Group(props) {
+  return /*#__PURE__*/React.createElement(ConfigConsumer, null, function (_ref) {
+    var _classNames;
+
+    var getPrefixCls = _ref.getPrefixCls,
+        direction = _ref.direction;
+    var customizePrefixCls = props.prefixCls,
+        _props$className = props.className,
+        className = _props$className === void 0 ? '' : _props$className;
+    var prefixCls = getPrefixCls('input-group', customizePrefixCls);
+    var cls = classnames(prefixCls, (_classNames = {}, _defineProperty$1(_classNames, "".concat(prefixCls, "-lg"), props.size === 'large'), _defineProperty$1(_classNames, "".concat(prefixCls, "-sm"), props.size === 'small'), _defineProperty$1(_classNames, "".concat(prefixCls, "-compact"), props.compact), _defineProperty$1(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _classNames), className);
+    return /*#__PURE__*/React.createElement("span", {
+      className: cls,
+      style: props.style,
+      onMouseEnter: props.onMouseEnter,
+      onMouseLeave: props.onMouseLeave,
+      onFocus: props.onFocus,
+      onBlur: props.onBlur
+    }, props.children);
+  });
+};
+
+var Group$1 = Group;
+
+var __rest$2 = undefined && undefined.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+var Search = /*#__PURE__*/React.forwardRef(function (props, ref) {
+  var _classNames;
+
+  var customizePrefixCls = props.prefixCls,
+      customizeInputPrefixCls = props.inputPrefixCls,
+      className = props.className,
+      customizeSize = props.size,
+      suffix = props.suffix,
+      _props$enterButton = props.enterButton,
+      enterButton = _props$enterButton === void 0 ? false : _props$enterButton,
+      addonAfter = props.addonAfter,
+      loading = props.loading,
+      disabled = props.disabled,
+      customOnSearch = props.onSearch,
+      customOnChange = props.onChange,
+      restProps = __rest$2(props, ["prefixCls", "inputPrefixCls", "className", "size", "suffix", "enterButton", "addonAfter", "loading", "disabled", "onSearch", "onChange"]);
+
+  var _React$useContext = React.useContext(ConfigContext),
+      getPrefixCls = _React$useContext.getPrefixCls,
+      direction = _React$useContext.direction;
+
+  var contextSize = React.useContext(SizeContext$1);
+  var size = customizeSize || contextSize;
+  var inputRef = React.useRef(null);
+
+  var onChange = function onChange(e) {
+    if (e && e.target && e.type === 'click' && customOnSearch) {
+      customOnSearch(e.target.value, e);
+    }
+
+    if (customOnChange) {
+      customOnChange(e);
+    }
+  };
+
+  var onMouseDown = function onMouseDown(e) {
+    var _a;
+
+    if (document.activeElement === ((_a = inputRef.current) === null || _a === void 0 ? void 0 : _a.input)) {
+      e.preventDefault();
+    }
+  };
+
+  var onSearch = function onSearch(e) {
+    var _a;
+
+    if (customOnSearch) {
+      customOnSearch((_a = inputRef.current) === null || _a === void 0 ? void 0 : _a.input.value, e);
+    }
+  };
+
+  var prefixCls = getPrefixCls('input-search', customizePrefixCls);
+  var inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
+  var searchIcon = typeof enterButton === 'boolean' ? /*#__PURE__*/React.createElement(SearchOutlined$1, null) : null;
+  var btnClassName = "".concat(prefixCls, "-button");
+  var button;
+  var enterButtonAsElement = enterButton || {};
+  var isAntdButton = enterButtonAsElement.type && enterButtonAsElement.type.__ANT_BUTTON === true;
+
+  if (isAntdButton || enterButtonAsElement.type === 'button') {
+    button = cloneElement(enterButtonAsElement, _extends$2({
+      onMouseDown: onMouseDown,
+      onClick: function onClick(e) {
+        var _a, _b;
+
+        (_b = (_a = enterButtonAsElement === null || enterButtonAsElement === void 0 ? void 0 : enterButtonAsElement.props) === null || _a === void 0 ? void 0 : _a.onClick) === null || _b === void 0 ? void 0 : _b.call(_a, e);
+        onSearch(e);
+      },
+      key: 'enterButton'
+    }, isAntdButton ? {
+      className: btnClassName,
+      size: size
+    } : {}));
+  } else {
+    button = /*#__PURE__*/React.createElement(Button$2, {
+      className: btnClassName,
+      type: enterButton ? 'primary' : undefined,
+      size: size,
+      disabled: disabled,
+      key: "enterButton",
+      onMouseDown: onMouseDown,
+      onClick: onSearch,
+      loading: loading,
+      icon: searchIcon
+    }, enterButton);
+  }
+
+  if (addonAfter) {
+    button = [button, cloneElement(addonAfter, {
+      key: 'addonAfter'
+    })];
+  }
+
+  var cls = classnames(prefixCls, (_classNames = {}, _defineProperty$1(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _defineProperty$1(_classNames, "".concat(prefixCls, "-").concat(size), !!size), _defineProperty$1(_classNames, "".concat(prefixCls, "-with-button"), !!enterButton), _classNames), className);
+  return /*#__PURE__*/React.createElement(Input$2, _extends$2({
+    ref: composeRef(inputRef, ref),
+    onPressEnter: onSearch
+  }, restProps, {
+    size: size,
+    prefixCls: inputPrefixCls,
+    addonAfter: button,
+    suffix: suffix,
+    onChange: onChange,
+    className: cls,
+    disabled: disabled
+  }));
+});
+Search.displayName = 'Search';
+var Search$1 = Search;
+
+// Thanks to https://github.com/andreypopp/react-textarea-autosize/
+
+/**
+ * calculateNodeHeight(uiTextNode, useCache = false)
+ */
+var HIDDEN_TEXTAREA_STYLE = "\n  min-height:0 !important;\n  max-height:none !important;\n  height:0 !important;\n  visibility:hidden !important;\n  overflow:hidden !important;\n  position:absolute !important;\n  z-index:-1000 !important;\n  top:0 !important;\n  right:0 !important\n";
+var SIZING_STYLE = ['letter-spacing', 'line-height', 'padding-top', 'padding-bottom', 'font-family', 'font-weight', 'font-size', 'font-variant', 'text-rendering', 'text-transform', 'width', 'text-indent', 'padding-left', 'padding-right', 'border-width', 'box-sizing', 'word-break'];
+var computedStyleCache = {};
+var hiddenTextarea;
+function calculateNodeStyling(node) {
+  var useCache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var nodeRef = node.getAttribute('id') || node.getAttribute('data-reactid') || node.getAttribute('name');
+
+  if (useCache && computedStyleCache[nodeRef]) {
+    return computedStyleCache[nodeRef];
+  }
+
+  var style = window.getComputedStyle(node);
+  var boxSizing = style.getPropertyValue('box-sizing') || style.getPropertyValue('-moz-box-sizing') || style.getPropertyValue('-webkit-box-sizing');
+  var paddingSize = parseFloat(style.getPropertyValue('padding-bottom')) + parseFloat(style.getPropertyValue('padding-top'));
+  var borderSize = parseFloat(style.getPropertyValue('border-bottom-width')) + parseFloat(style.getPropertyValue('border-top-width'));
+  var sizingStyle = SIZING_STYLE.map(function (name) {
+    return "".concat(name, ":").concat(style.getPropertyValue(name));
+  }).join(';');
+  var nodeInfo = {
+    sizingStyle: sizingStyle,
+    paddingSize: paddingSize,
+    borderSize: borderSize,
+    boxSizing: boxSizing
+  };
+
+  if (useCache && nodeRef) {
+    computedStyleCache[nodeRef] = nodeInfo;
+  }
+
+  return nodeInfo;
+}
+function calculateNodeHeight(uiTextNode) {
+  var useCache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var minRows = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var maxRows = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+
+  if (!hiddenTextarea) {
+    hiddenTextarea = document.createElement('textarea');
+    hiddenTextarea.setAttribute('tab-index', '-1');
+    hiddenTextarea.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(hiddenTextarea);
+  } // Fix wrap="off" issue
+  // https://github.com/ant-design/ant-design/issues/6577
+
+
+  if (uiTextNode.getAttribute('wrap')) {
+    hiddenTextarea.setAttribute('wrap', uiTextNode.getAttribute('wrap'));
+  } else {
+    hiddenTextarea.removeAttribute('wrap');
+  } // Copy all CSS properties that have an impact on the height of the content in
+  // the textbox
+
+
+  var _calculateNodeStyling = calculateNodeStyling(uiTextNode, useCache),
+      paddingSize = _calculateNodeStyling.paddingSize,
+      borderSize = _calculateNodeStyling.borderSize,
+      boxSizing = _calculateNodeStyling.boxSizing,
+      sizingStyle = _calculateNodeStyling.sizingStyle; // Need to have the overflow attribute to hide the scrollbar otherwise
+  // text-lines will not calculated properly as the shadow will technically be
+  // narrower for content
+
+
+  hiddenTextarea.setAttribute('style', "".concat(sizingStyle, ";").concat(HIDDEN_TEXTAREA_STYLE));
+  hiddenTextarea.value = uiTextNode.value || uiTextNode.placeholder || '';
+  var minHeight = Number.MIN_SAFE_INTEGER;
+  var maxHeight = Number.MAX_SAFE_INTEGER;
+  var height = hiddenTextarea.scrollHeight;
+  var overflowY;
+
+  if (boxSizing === 'border-box') {
+    // border-box: add border, since height = content + padding + border
+    height += borderSize;
+  } else if (boxSizing === 'content-box') {
+    // remove padding, since height = content
+    height -= paddingSize;
+  }
+
+  if (minRows !== null || maxRows !== null) {
+    // measure height of a textarea with a single row
+    hiddenTextarea.value = ' ';
+    var singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
+
+    if (minRows !== null) {
+      minHeight = singleRowHeight * minRows;
+
+      if (boxSizing === 'border-box') {
+        minHeight = minHeight + paddingSize + borderSize;
+      }
+
+      height = Math.max(minHeight, height);
+    }
+
+    if (maxRows !== null) {
+      maxHeight = singleRowHeight * maxRows;
+
+      if (boxSizing === 'border-box') {
+        maxHeight = maxHeight + paddingSize + borderSize;
+      }
+
+      overflowY = height > maxHeight ? '' : 'hidden';
+      height = Math.min(maxHeight, height);
+    }
+  }
+
+  return {
+    height: height,
+    minHeight: minHeight,
+    maxHeight: maxHeight,
+    overflowY: overflowY,
+    resize: 'none'
+  };
+}
+
+var RESIZE_STATUS;
+
+(function (RESIZE_STATUS) {
+  RESIZE_STATUS[RESIZE_STATUS["NONE"] = 0] = "NONE";
+  RESIZE_STATUS[RESIZE_STATUS["RESIZING"] = 1] = "RESIZING";
+  RESIZE_STATUS[RESIZE_STATUS["RESIZED"] = 2] = "RESIZED";
+})(RESIZE_STATUS || (RESIZE_STATUS = {}));
+
+var ResizableTextArea = /*#__PURE__*/function (_React$Component) {
+  _inherits(ResizableTextArea, _React$Component);
+
+  var _super = _createSuper(ResizableTextArea);
+
+  function ResizableTextArea(props) {
+    var _this;
+
+    _classCallCheck(this, ResizableTextArea);
+
+    _this = _super.call(this, props);
+    _this.nextFrameActionId = void 0;
+    _this.resizeFrameId = void 0;
+    _this.textArea = void 0;
+
+    _this.saveTextArea = function (textArea) {
+      _this.textArea = textArea;
+    };
+
+    _this.handleResize = function (size) {
+      var resizeStatus = _this.state.resizeStatus;
+      var _this$props = _this.props,
+          autoSize = _this$props.autoSize,
+          onResize = _this$props.onResize;
+
+      if (resizeStatus !== RESIZE_STATUS.NONE) {
+        return;
+      }
+
+      if (typeof onResize === 'function') {
+        onResize(size);
+      }
+
+      if (autoSize) {
+        _this.resizeOnNextFrame();
+      }
+    };
+
+    _this.resizeOnNextFrame = function () {
+      cancelAnimationFrame(_this.nextFrameActionId);
+      _this.nextFrameActionId = requestAnimationFrame(_this.resizeTextarea);
+    };
+
+    _this.resizeTextarea = function () {
+      var autoSize = _this.props.autoSize;
+
+      if (!autoSize || !_this.textArea) {
+        return;
+      }
+
+      var minRows = autoSize.minRows,
+          maxRows = autoSize.maxRows;
+      var textareaStyles = calculateNodeHeight(_this.textArea, false, minRows, maxRows);
+
+      _this.setState({
+        textareaStyles: textareaStyles,
+        resizeStatus: RESIZE_STATUS.RESIZING
+      }, function () {
+        cancelAnimationFrame(_this.resizeFrameId);
+        _this.resizeFrameId = requestAnimationFrame(function () {
+          _this.setState({
+            resizeStatus: RESIZE_STATUS.RESIZED
+          }, function () {
+            _this.resizeFrameId = requestAnimationFrame(function () {
+              _this.setState({
+                resizeStatus: RESIZE_STATUS.NONE
+              });
+
+              _this.fixFirefoxAutoScroll();
+            });
+          });
+        });
+      });
+    };
+
+    _this.renderTextArea = function () {
+      var _this$props2 = _this.props,
+          _this$props2$prefixCl = _this$props2.prefixCls,
+          prefixCls = _this$props2$prefixCl === void 0 ? 'rc-textarea' : _this$props2$prefixCl,
+          autoSize = _this$props2.autoSize,
+          onResize = _this$props2.onResize,
+          className = _this$props2.className,
+          disabled = _this$props2.disabled;
+      var _this$state = _this.state,
+          textareaStyles = _this$state.textareaStyles,
+          resizeStatus = _this$state.resizeStatus;
+      var otherProps = omit(_this.props, ['prefixCls', 'onPressEnter', 'autoSize', 'defaultValue', 'onResize']);
+      var cls = classnames(prefixCls, className, _defineProperty$1({}, "".concat(prefixCls, "-disabled"), disabled)); // Fix https://github.com/ant-design/ant-design/issues/6776
+      // Make sure it could be reset when using form.getFieldDecorator
+
+      if ('value' in otherProps) {
+        otherProps.value = otherProps.value || '';
+      }
+
+      var style = _objectSpread2(_objectSpread2(_objectSpread2({}, _this.props.style), textareaStyles), resizeStatus === RESIZE_STATUS.RESIZING ? // React will warning when mix `overflow` & `overflowY`.
+      // We need to define this separately.
+      {
+        overflowX: 'hidden',
+        overflowY: 'hidden'
+      } : null);
+
+      return /*#__PURE__*/React.createElement(ResizeObserver, {
+        onResize: _this.handleResize,
+        disabled: !(autoSize || onResize)
+      }, /*#__PURE__*/React.createElement("textarea", _extends$2({}, otherProps, {
+        className: cls,
+        style: style,
+        ref: _this.saveTextArea
+      })));
+    };
+
+    _this.state = {
+      textareaStyles: {},
+      resizeStatus: RESIZE_STATUS.NONE
+    };
+    return _this;
+  }
+
+  _createClass(ResizableTextArea, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      // Re-render with the new content or new autoSize property then recalculate the height as required.
+      if (prevProps.value !== this.props.value || !shallowequal(prevProps.autoSize, this.props.autoSize)) {
+        this.resizeTextarea();
+      }
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      cancelAnimationFrame(this.nextFrameActionId);
+      cancelAnimationFrame(this.resizeFrameId);
+    } // https://github.com/ant-design/ant-design/issues/21870
+
+  }, {
+    key: "fixFirefoxAutoScroll",
+    value: function fixFirefoxAutoScroll() {
+      try {
+        if (document.activeElement === this.textArea) {
+          var currentStart = this.textArea.selectionStart;
+          var currentEnd = this.textArea.selectionEnd;
+          this.textArea.setSelectionRange(currentStart, currentEnd);
+        }
+      } catch (e) {// Fix error in Chrome:
+        // Failed to read the 'selectionStart' property from 'HTMLInputElement'
+        // http://stackoverflow.com/q/21177489/3040605
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return this.renderTextArea();
+    }
+  }]);
+
+  return ResizableTextArea;
+}(React.Component);
+
+var TextArea$2 = /*#__PURE__*/function (_React$Component) {
+  _inherits(TextArea, _React$Component);
+
+  var _super = _createSuper(TextArea);
+
+  function TextArea(props) {
+    var _this;
+
+    _classCallCheck(this, TextArea);
+
+    _this = _super.call(this, props);
+    _this.resizableTextArea = void 0;
+
+    _this.focus = function () {
+      _this.resizableTextArea.textArea.focus();
+    };
+
+    _this.saveTextArea = function (resizableTextArea) {
+      _this.resizableTextArea = resizableTextArea;
+    };
+
+    _this.handleChange = function (e) {
+      var onChange = _this.props.onChange;
+
+      _this.setValue(e.target.value, function () {
+        _this.resizableTextArea.resizeTextarea();
+      });
+
+      if (onChange) {
+        onChange(e);
+      }
+    };
+
+    _this.handleKeyDown = function (e) {
+      var _this$props = _this.props,
+          onPressEnter = _this$props.onPressEnter,
+          onKeyDown = _this$props.onKeyDown;
+
+      if (e.keyCode === 13 && onPressEnter) {
+        onPressEnter(e);
+      }
+
+      if (onKeyDown) {
+        onKeyDown(e);
+      }
+    };
+
+    var value = typeof props.value === 'undefined' || props.value === null ? props.defaultValue : props.value;
+    _this.state = {
+      value: value
+    };
+    return _this;
+  }
+
+  _createClass(TextArea, [{
+    key: "setValue",
+    value: function setValue(value, callback) {
+      if (!('value' in this.props)) {
+        this.setState({
+          value: value
+        }, callback);
+      }
+    }
+  }, {
+    key: "blur",
+    value: function blur() {
+      this.resizableTextArea.textArea.blur();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/React.createElement(ResizableTextArea, _extends$2({}, this.props, {
+        value: this.state.value,
+        onKeyDown: this.handleKeyDown,
+        onChange: this.handleChange,
+        ref: this.saveTextArea
+      }));
+    }
+  }], [{
+    key: "getDerivedStateFromProps",
+    value: function getDerivedStateFromProps(nextProps) {
+      if ('value' in nextProps) {
+        return {
+          value: nextProps.value
+        };
+      }
+
+      return null;
+    }
+  }]);
+
+  return TextArea;
+}(React.Component);
+
+var __rest$1 = undefined && undefined.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+function fixEmojiLength(value, maxLength) {
+  return _toConsumableArray(value || '').slice(0, maxLength).join('');
+}
+
+var TextArea = /*#__PURE__*/React.forwardRef(function (_a, ref) {
+  var _classNames;
+
+  var customizePrefixCls = _a.prefixCls,
+      _a$bordered = _a.bordered,
+      bordered = _a$bordered === void 0 ? true : _a$bordered,
+      _a$showCount = _a.showCount,
+      showCount = _a$showCount === void 0 ? false : _a$showCount,
+      maxLength = _a.maxLength,
+      className = _a.className,
+      style = _a.style,
+      customizeSize = _a.size,
+      onCompositionStart = _a.onCompositionStart,
+      onCompositionEnd = _a.onCompositionEnd,
+      onChange = _a.onChange,
+      props = __rest$1(_a, ["prefixCls", "bordered", "showCount", "maxLength", "className", "style", "size", "onCompositionStart", "onCompositionEnd", "onChange"]);
+
+  var _React$useContext = React.useContext(ConfigContext),
+      getPrefixCls = _React$useContext.getPrefixCls,
+      direction = _React$useContext.direction;
+
+  var size = React.useContext(SizeContext$1);
+  var innerRef = React.useRef(null);
+  var clearableInputRef = React.useRef(null);
+
+  var _React$useState = React.useState(false),
+      _React$useState2 = _slicedToArray$1(_React$useState, 2),
+      compositing = _React$useState2[0],
+      setCompositing = _React$useState2[1];
+
+  var _useMergedState = useControlledState(props.defaultValue, {
+    value: props.value
+  }),
+      _useMergedState2 = _slicedToArray$1(_useMergedState, 2),
+      value = _useMergedState2[0],
+      setValue = _useMergedState2[1];
+
+  var handleSetValue = function handleSetValue(val, callback) {
+    if (props.value === undefined) {
+      setValue(val);
+      callback === null || callback === void 0 ? void 0 : callback();
+    }
+  }; // =========================== Value Update ===========================
+  // Max length value
+
+
+  var hasMaxLength = Number(maxLength) > 0;
+
+  var onInternalCompositionStart = function onInternalCompositionStart(e) {
+    setCompositing(true);
+    onCompositionStart === null || onCompositionStart === void 0 ? void 0 : onCompositionStart(e);
+  };
+
+  var onInternalCompositionEnd = function onInternalCompositionEnd(e) {
+    setCompositing(false);
+    var triggerValue = e.currentTarget.value;
+
+    if (hasMaxLength) {
+      triggerValue = fixEmojiLength(triggerValue, maxLength);
+    } // Patch composition onChange when value changed
+
+
+    if (triggerValue !== value) {
+      handleSetValue(triggerValue);
+      resolveOnChange(e.currentTarget, e, onChange, triggerValue);
+    }
+
+    onCompositionEnd === null || onCompositionEnd === void 0 ? void 0 : onCompositionEnd(e);
+  };
+
+  var handleChange = function handleChange(e) {
+    var triggerValue = e.target.value;
+
+    if (!compositing && hasMaxLength) {
+      triggerValue = fixEmojiLength(triggerValue, maxLength);
+    }
+
+    handleSetValue(triggerValue);
+    resolveOnChange(e.currentTarget, e, onChange, triggerValue);
+  }; // ============================== Reset ===============================
+
+
+  var handleReset = function handleReset(e) {
+    var _a, _b;
+
+    handleSetValue('', function () {
+      var _a;
+
+      (_a = innerRef.current) === null || _a === void 0 ? void 0 : _a.focus();
+    });
+    resolveOnChange((_b = (_a = innerRef.current) === null || _a === void 0 ? void 0 : _a.resizableTextArea) === null || _b === void 0 ? void 0 : _b.textArea, e, onChange);
+  };
+
+  var prefixCls = getPrefixCls('input', customizePrefixCls);
+  React.useImperativeHandle(ref, function () {
+    var _a;
+
+    return {
+      resizableTextArea: (_a = innerRef.current) === null || _a === void 0 ? void 0 : _a.resizableTextArea,
+      focus: function focus(option) {
+        var _a, _b;
+
+        triggerFocus((_b = (_a = innerRef.current) === null || _a === void 0 ? void 0 : _a.resizableTextArea) === null || _b === void 0 ? void 0 : _b.textArea, option);
+      },
+      blur: function blur() {
+        var _a;
+
+        return (_a = innerRef.current) === null || _a === void 0 ? void 0 : _a.blur();
+      }
+    };
+  });
+  var textArea = /*#__PURE__*/React.createElement(TextArea$2, _extends$2({}, omit(props, ['allowClear']), {
+    className: classnames((_classNames = {}, _defineProperty$1(_classNames, "".concat(prefixCls, "-borderless"), !bordered), _defineProperty$1(_classNames, className, className && !showCount), _defineProperty$1(_classNames, "".concat(prefixCls, "-sm"), size === 'small' || customizeSize === 'small'), _defineProperty$1(_classNames, "".concat(prefixCls, "-lg"), size === 'large' || customizeSize === 'large'), _classNames)),
+    style: showCount ? undefined : style,
+    prefixCls: prefixCls,
+    onCompositionStart: onInternalCompositionStart,
+    onChange: handleChange,
+    onCompositionEnd: onInternalCompositionEnd,
+    ref: innerRef
+  }));
+  var val = fixControlledValue(value);
+
+  if (!compositing && hasMaxLength && (props.value === null || props.value === undefined)) {
+    // fix #27612 将value转为数组进行截取，解决 '😂'.length === 2 等emoji表情导致的截取乱码的问题
+    val = fixEmojiLength(val, maxLength);
+  } // TextArea
+
+
+  var textareaNode = /*#__PURE__*/React.createElement(ClearableLabeledInput$1, _extends$2({}, props, {
+    prefixCls: prefixCls,
+    direction: direction,
+    inputType: "text",
+    value: val,
+    element: textArea,
+    handleReset: handleReset,
+    ref: clearableInputRef,
+    bordered: bordered,
+    style: showCount ? undefined : style
+  })); // Only show text area wrapper when needed
+
+  if (showCount) {
+    var valueLength = _toConsumableArray(val).length;
+
+    var dataCount = '';
+
+    if (_typeof(showCount) === 'object') {
+      dataCount = showCount.formatter({
+        count: valueLength,
+        maxLength: maxLength
+      });
+    } else {
+      dataCount = "".concat(valueLength).concat(hasMaxLength ? " / ".concat(maxLength) : '');
+    }
+
+    return /*#__PURE__*/React.createElement("div", {
+      className: classnames("".concat(prefixCls, "-textarea"), _defineProperty$1({}, "".concat(prefixCls, "-textarea-rtl"), direction === 'rtl'), "".concat(prefixCls, "-textarea-show-count"), className),
+      style: style,
+      "data-count": dataCount
+    }, textareaNode);
+  }
+
+  return textareaNode;
+});
+var TextArea$1 = TextArea;
+
+// This icon file is generated automatically.
+var EyeOutlined$2 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 000 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z" } }] }, "name": "eye", "theme": "outlined" };
+var EyeOutlinedSvg = EyeOutlined$2;
+
+var EyeOutlined = function EyeOutlined(props, ref) {
+  return /*#__PURE__*/React.createElement(AntdIcon, _objectSpread2(_objectSpread2({}, props), {}, {
+    ref: ref,
+    icon: EyeOutlinedSvg
+  }));
+};
+
+EyeOutlined.displayName = 'EyeOutlined';
+var EyeOutlined$1 = /*#__PURE__*/React.forwardRef(EyeOutlined);
+
+// This icon file is generated automatically.
+var EyeInvisibleOutlined$2 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M942.2 486.2Q889.47 375.11 816.7 305l-50.88 50.88C807.31 395.53 843.45 447.4 874.7 512 791.5 684.2 673.4 766 512 766q-72.67 0-133.87-22.38L323 798.75Q408 838 512 838q288.3 0 430.2-300.3a60.29 60.29 0 000-51.5zm-63.57-320.64L836 122.88a8 8 0 00-11.32 0L715.31 232.2Q624.86 186 512 186q-288.3 0-430.2 300.3a60.3 60.3 0 000 51.5q56.69 119.4 136.5 191.41L112.48 835a8 8 0 000 11.31L155.17 889a8 8 0 0011.31 0l712.15-712.12a8 8 0 000-11.32zM149.3 512C232.6 339.8 350.7 258 512 258c54.54 0 104.13 9.36 149.12 28.39l-70.3 70.3a176 176 0 00-238.13 238.13l-83.42 83.42C223.1 637.49 183.3 582.28 149.3 512zm246.7 0a112.11 112.11 0 01146.2-106.69L401.31 546.2A112 112 0 01396 512z" } }, { "tag": "path", "attrs": { "d": "M508 624c-3.46 0-6.87-.16-10.25-.47l-52.82 52.82a176.09 176.09 0 00227.42-227.42l-52.82 52.82c.31 3.38.47 6.79.47 10.25a111.94 111.94 0 01-112 112z" } }] }, "name": "eye-invisible", "theme": "outlined" };
+var EyeInvisibleOutlinedSvg = EyeInvisibleOutlined$2;
+
+var EyeInvisibleOutlined = function EyeInvisibleOutlined(props, ref) {
+  return /*#__PURE__*/React.createElement(AntdIcon, _objectSpread2(_objectSpread2({}, props), {}, {
+    ref: ref,
+    icon: EyeInvisibleOutlinedSvg
+  }));
+};
+
+EyeInvisibleOutlined.displayName = 'EyeInvisibleOutlined';
+var EyeInvisibleOutlined$1 = /*#__PURE__*/React.forwardRef(EyeInvisibleOutlined);
+
+var __rest = undefined && undefined.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+var ActionMap = {
+  click: 'onClick',
+  hover: 'onMouseOver'
+};
+var Password = /*#__PURE__*/React.forwardRef(function (props, ref) {
+  var _useState = useState(false),
+      _useState2 = _slicedToArray$1(_useState, 2),
+      visible = _useState2[0],
+      setVisible = _useState2[1];
+
+  var onVisibleChange = function onVisibleChange() {
+    var disabled = props.disabled;
+
+    if (disabled) {
+      return;
+    }
+
+    setVisible(!visible);
+  };
+
+  var getIcon = function getIcon(prefixCls) {
+    var _iconProps;
+
+    var action = props.action,
+        _props$iconRender = props.iconRender,
+        iconRender = _props$iconRender === void 0 ? function () {
+      return null;
+    } : _props$iconRender;
+    var iconTrigger = ActionMap[action] || '';
+    var icon = iconRender(visible);
+    var iconProps = (_iconProps = {}, _defineProperty$1(_iconProps, iconTrigger, onVisibleChange), _defineProperty$1(_iconProps, "className", "".concat(prefixCls, "-icon")), _defineProperty$1(_iconProps, "key", 'passwordIcon'), _defineProperty$1(_iconProps, "onMouseDown", function onMouseDown(e) {
+      // Prevent focused state lost
+      // https://github.com/ant-design/ant-design/issues/15173
+      e.preventDefault();
+    }), _defineProperty$1(_iconProps, "onMouseUp", function onMouseUp(e) {
+      // Prevent caret position change
+      // https://github.com/ant-design/ant-design/issues/23524
+      e.preventDefault();
+    }), _iconProps);
+    return /*#__PURE__*/React.cloneElement( /*#__PURE__*/React.isValidElement(icon) ? icon : /*#__PURE__*/React.createElement("span", null, icon), iconProps);
+  };
+
+  var renderPassword = function renderPassword(_ref) {
+    var getPrefixCls = _ref.getPrefixCls;
+
+    var className = props.className,
+        customizePrefixCls = props.prefixCls,
+        customizeInputPrefixCls = props.inputPrefixCls,
+        size = props.size,
+        visibilityToggle = props.visibilityToggle,
+        restProps = __rest(props, ["className", "prefixCls", "inputPrefixCls", "size", "visibilityToggle"]);
+
+    var inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
+    var prefixCls = getPrefixCls('input-password', customizePrefixCls);
+    var suffixIcon = visibilityToggle && getIcon(prefixCls);
+    var inputClassName = classnames(prefixCls, className, _defineProperty$1({}, "".concat(prefixCls, "-").concat(size), !!size));
+
+    var omittedProps = _extends$2(_extends$2({}, omit(restProps, ['suffix', 'iconRender'])), {
+      type: visible ? 'text' : 'password',
+      className: inputClassName,
+      prefixCls: inputPrefixCls,
+      suffix: suffixIcon
+    });
+
+    if (size) {
+      omittedProps.size = size;
+    }
+
+    return /*#__PURE__*/React.createElement(Input$2, _extends$2({
+      ref: ref
+    }, omittedProps));
+  };
+
+  return /*#__PURE__*/React.createElement(ConfigConsumer, null, renderPassword);
+});
+Password.defaultProps = {
+  action: 'click',
+  visibilityToggle: true,
+  iconRender: function iconRender(visible) {
+    return visible ? /*#__PURE__*/React.createElement(EyeOutlined$1, null) : /*#__PURE__*/React.createElement(EyeInvisibleOutlined$1, null);
+  }
+};
+Password.displayName = 'Password';
+var Password$1 = Password;
+
+Input$2.Group = Group$1;
+Input$2.Search = Search$1;
+Input$2.TextArea = TextArea$1;
+Input$2.Password = Password$1;
 
 /* eslint-disable no-nested-ternary */
 var StyledButton$1 = styled(Button$2).withConfig({
@@ -7973,5 +10645,282 @@ var Button3 = function Button3(props) {
   return /*#__PURE__*/React__default.createElement(StyledButton, props, props.children);
 };
 
-export { Button, Button3, styleReset };
+var _extends_1 = createCommonjsModule(function (module) {
+function _extends() {
+  module.exports = _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+  return _extends.apply(this, arguments);
+}
+
+module.exports = _extends, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var _extends = unwrapExports(_extends_1);
+
+var defineProperty = createCommonjsModule(function (module) {
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var _defineProperty = unwrapExports(defineProperty);
+
+var objectWithoutPropertiesLoose = createCommonjsModule(function (module) {
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+module.exports = _objectWithoutPropertiesLoose, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+unwrapExports(objectWithoutPropertiesLoose);
+
+var objectWithoutProperties = createCommonjsModule(function (module) {
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+  var target = objectWithoutPropertiesLoose(source, excluded);
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+module.exports = _objectWithoutProperties, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var _objectWithoutProperties = unwrapExports(objectWithoutProperties);
+
+var arrayWithHoles = createCommonjsModule(function (module) {
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+module.exports = _arrayWithHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+unwrapExports(arrayWithHoles);
+
+var iterableToArrayLimit = createCommonjsModule(function (module) {
+function _iterableToArrayLimit(arr, i) {
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+
+  var _s, _e;
+
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+unwrapExports(iterableToArrayLimit);
+
+var arrayLikeToArray = createCommonjsModule(function (module) {
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+unwrapExports(arrayLikeToArray);
+
+var unsupportedIterableToArray = createCommonjsModule(function (module) {
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+
+module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+unwrapExports(unsupportedIterableToArray);
+
+var nonIterableRest = createCommonjsModule(function (module) {
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+module.exports = _nonIterableRest, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+unwrapExports(nonIterableRest);
+
+var slicedToArray = createCommonjsModule(function (module) {
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+
+module.exports = _slicedToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+});
+
+var _slicedToArray = unwrapExports(slicedToArray);
+
+var StyledFloatWrapper = styled.div.withConfig({
+  displayName: "floating-label__StyledFloatWrapper",
+  componentId: "sc-1p0x6j5-0"
+})(["position:relative;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;.required{opacity:0.5;}.placeholder{display:flex;position:absolute;opacity:0.5;top:20px;left:12px;}.label{font-size:15px;position:absolute;pointer-events:none;left:12px;top:12px;transition:0.2s ease all;z-index:2;}.label-float{top:6px;font-size:11px;}.disabled{opacity:0.6;}"]);
+
+var FloatLabel = function FloatLabel(_ref) {
+  var children = _ref.children,
+      label = _ref.label,
+      value = _ref.value,
+      placeholder = _ref.placeholder,
+      required = _ref.required,
+      className = _ref.className,
+      style = _ref.style,
+      labelStyle = _ref.labelStyle,
+      placeholderStyle = _ref.placeholderStyle;
+
+  var _useState = useState(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      focus = _useState2[0],
+      setFocus = _useState2[1];
+
+  var isFocused = focus || value && value.length !== 0;
+  var labelClass = isFocused ? 'label label-float ' : 'label ';
+  var wrapperClass = 'float-label noselect ';
+  if (className) wrapperClass = wrapperClass.concat(className);
+  console.log("FloatLabel: ", {
+    isFocused: isFocused,
+    focus: focus,
+    value: value
+  });
+  return /*#__PURE__*/React__default.createElement(StyledFloatWrapper, {
+    className: wrapperClass,
+    onBlur: function onBlur() {
+      return setFocus(false);
+    },
+    onFocus: function onFocus() {
+      return setFocus(true);
+    },
+    style: style
+  }, children, focus && !value && /*#__PURE__*/React__default.createElement("div", {
+    className: 'placeholder noselect',
+    style: placeholderStyle
+  }, placeholder), /*#__PURE__*/React__default.createElement("label", {
+    className: labelClass,
+    style: labelStyle
+  }, /*#__PURE__*/React__default.createElement("span", {
+    className: 'required noselect'
+  }, required && '* '), " ", label));
+};
+
+var _excluded = ["required", "label", "placeholder", "value"];
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+var StyledInput = styled(Input$2).withConfig({
+  displayName: "Input__StyledInput",
+  componentId: "sc-wrd3xz-0"
+})(["height:50px;&&&{padding-top:16px !important;}"]);
+var Input = /*#__PURE__*/React__default.forwardRef(function Input(_ref, ref) {
+  var required = _ref.required,
+      label = _ref.label,
+      placeholder = _ref.placeholder,
+      value = _ref.value,
+      other = _objectWithoutProperties(_ref, _excluded);
+
+  console.log("input: ", _objectSpread({
+    required: required,
+    label: label,
+    placeholder: placeholder,
+    value: value
+  }, other));
+  return /*#__PURE__*/React__default.createElement(FloatLabel, {
+    required: required,
+    label: label,
+    placeholder: placeholder,
+    value: value
+  }, /*#__PURE__*/React__default.createElement(StyledInput, _extends({
+    value: value
+  }, other)));
+}); // export const Input = React.forwardRef(function Input({required, label, placeholder, ...other}, ref) {
+// 	const [value, setValue] = useState("");
+// 	console.log("input: ", {required, label, placeholder, value, ...other, ref})
+// 	return (
+// 		<FloatLabel required={required} label={label} placeholder={placeholder} value={value}>
+// 			<StyledInput value={value} onChange={(e) => setValue(e.target.value)} {...other} />
+// 		</FloatLabel>
+// 	);
+// });
+
+export { Button, Button3, Input, StyledInput, styleReset };
 //# sourceMappingURL=index.js.map
