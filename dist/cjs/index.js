@@ -54,7 +54,7 @@ function _extends$2() {
   return _extends$2.apply(this, arguments);
 }
 
-function _defineProperty$1(obj, key, value) {
+function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -249,7 +249,7 @@ var classnames = createCommonjsModule(function (module) {
 }());
 });
 
-function ownKeys$1(object, enumerableOnly) {
+function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
   if (Object.getOwnPropertySymbols) {
@@ -265,9 +265,9 @@ function ownKeys$1(object, enumerableOnly) {
 function _objectSpread2(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = null != arguments[i] ? arguments[i] : {};
-    i % 2 ? ownKeys$1(Object(source), !0).forEach(function (key) {
-      _defineProperty$1(target, key, source[key]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function (key) {
+    i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
+      _defineProperty(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
       Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
     });
   }
@@ -4008,13 +4008,13 @@ function _validateRule() {
               delete cloneRule.defaultField;
             }
 
-            validator = new AsyncValidator(_defineProperty$1({}, name, [cloneRule]));
+            validator = new AsyncValidator(_defineProperty({}, name, [cloneRule]));
             messages = setValues({}, defaultValidateMessages, options.validateMessages);
             validator.messages(messages);
             result = [];
             _context2.prev = 8;
             _context2.next = 11;
-            return Promise.resolve(validator.validate(_defineProperty$1({}, name, value), _objectSpread2({}, options)));
+            return Promise.resolve(validator.validate(_defineProperty({}, name, value), _objectSpread2({}, options)));
 
           case 11:
             _context2.next = 16;
@@ -4751,7 +4751,7 @@ var Field = /*#__PURE__*/function (_React$Component) {
       var value = _this.getValue();
 
       var mergedGetValueProps = getValueProps || function (val) {
-        return _defineProperty$1({}, valuePropName, val);
+        return _defineProperty({}, valuePropName, val);
       }; // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
 
@@ -6155,7 +6155,7 @@ var FormProvider = function FormProvider(_ref) {
       },
       registerForm: function registerForm(name, form) {
         if (name) {
-          formsRef.current = _objectSpread2(_objectSpread2({}, formsRef.current), {}, _defineProperty$1({}, name, form));
+          formsRef.current = _objectSpread2(_objectSpread2({}, formsRef.current), {}, _defineProperty({}, name, form));
         }
 
         formContext.registerForm(name, form);
@@ -6695,7 +6695,7 @@ var Empty = function Empty(_a) {
     }
 
     return /*#__PURE__*/React__namespace.createElement("div", _extends$2({
-      className: classnames(prefixCls, (_classNames = {}, _defineProperty$1(_classNames, "".concat(prefixCls, "-normal"), image === simpleEmptyImg), _defineProperty$1(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _classNames), className)
+      className: classnames(prefixCls, (_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-normal"), image === simpleEmptyImg), _defineProperty(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _classNames), className)
     }, restProps), /*#__PURE__*/React__namespace.createElement("div", {
       className: "".concat(prefixCls, "-image"),
       style: imageStyle
@@ -7154,13 +7154,13 @@ function useStatus(supportMotion, visible, getElement, _ref) {
 
     switch (status) {
       case 'appear':
-        return _ref2 = {}, _defineProperty$1(_ref2, STEP_PREPARE, onAppearPrepare), _defineProperty$1(_ref2, STEP_START, onAppearStart), _defineProperty$1(_ref2, STEP_ACTIVE, onAppearActive), _ref2;
+        return _ref2 = {}, _defineProperty(_ref2, STEP_PREPARE, onAppearPrepare), _defineProperty(_ref2, STEP_START, onAppearStart), _defineProperty(_ref2, STEP_ACTIVE, onAppearActive), _ref2;
 
       case 'enter':
-        return _ref3 = {}, _defineProperty$1(_ref3, STEP_PREPARE, onEnterPrepare), _defineProperty$1(_ref3, STEP_START, onEnterStart), _defineProperty$1(_ref3, STEP_ACTIVE, onEnterActive), _ref3;
+        return _ref3 = {}, _defineProperty(_ref3, STEP_PREPARE, onEnterPrepare), _defineProperty(_ref3, STEP_START, onEnterStart), _defineProperty(_ref3, STEP_ACTIVE, onEnterActive), _ref3;
 
       case 'leave':
-        return _ref4 = {}, _defineProperty$1(_ref4, STEP_PREPARE, onLeavePrepare), _defineProperty$1(_ref4, STEP_START, onLeaveStart), _defineProperty$1(_ref4, STEP_ACTIVE, onLeaveActive), _ref4;
+        return _ref4 = {}, _defineProperty(_ref4, STEP_PREPARE, onLeavePrepare), _defineProperty(_ref4, STEP_START, onLeaveStart), _defineProperty(_ref4, STEP_ACTIVE, onLeaveActive), _ref4;
 
       default:
         return {};
@@ -7402,7 +7402,7 @@ function genCSSMotion(config) {
       }
 
       motionChildren = children(_objectSpread2(_objectSpread2({}, mergedProps), {}, {
-        className: classnames(getTransitionName(motionName, status), (_classNames = {}, _defineProperty$1(_classNames, getTransitionName(motionName, "".concat(status, "-").concat(statusSuffix)), statusSuffix), _defineProperty$1(_classNames, motionName, typeof motionName === 'string'), _classNames)),
+        className: classnames(getTransitionName(motionName, status), (_classNames = {}, _defineProperty(_classNames, getTransitionName(motionName, "".concat(status, "-").concat(statusSuffix)), statusSuffix), _defineProperty(_classNames, motionName, typeof motionName === 'string'), _classNames)),
         style: statusStyle
       }), setNodeRef);
     }
@@ -8466,7 +8466,7 @@ var Icon = /*#__PURE__*/React__namespace.forwardRef(function (props, ref) {
       _React$useContext$pre = _React$useContext.prefixCls,
       prefixCls = _React$useContext$pre === void 0 ? 'anticon' : _React$useContext$pre;
 
-  var classString = classnames(prefixCls, (_classNames = {}, _defineProperty$1(_classNames, "".concat(prefixCls, "-").concat(icon.name), !!icon.name), _defineProperty$1(_classNames, "".concat(prefixCls, "-spin"), !!spin || icon.name === 'loading'), _classNames), className);
+  var classString = classnames(prefixCls, (_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-").concat(icon.name), !!icon.name), _defineProperty(_classNames, "".concat(prefixCls, "-spin"), !!spin || icon.name === 'loading'), _classNames), className);
   var iconTabIndex = tabIndex;
 
   if (iconTabIndex === undefined && onClick) {
@@ -8666,7 +8666,7 @@ var ButtonGroup = function ButtonGroup(props) {
         console.warn(new UnreachableException(size).error);
     }
 
-    var classes = classnames(prefixCls, (_classNames = {}, _defineProperty$1(_classNames, "".concat(prefixCls, "-").concat(sizeCls), sizeCls), _defineProperty$1(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _classNames), className);
+    var classes = classnames(prefixCls, (_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-").concat(sizeCls), sizeCls), _defineProperty(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _classNames), className);
     return /*#__PURE__*/React__namespace.createElement("div", _extends$2({}, others, {
       className: classes
     }));
@@ -9166,7 +9166,7 @@ var InternalButton = function InternalButton(props, ref) {
   var sizeFullname = customizeSize || size;
   var sizeCls = sizeFullname ? sizeClassNameMap[sizeFullname] || '' : '';
   var iconType = innerLoading ? 'loading' : icon;
-  var classes = classnames(prefixCls, (_classNames = {}, _defineProperty$1(_classNames, "".concat(prefixCls, "-").concat(type), type), _defineProperty$1(_classNames, "".concat(prefixCls, "-").concat(shape), shape !== 'default' && shape), _defineProperty$1(_classNames, "".concat(prefixCls, "-").concat(sizeCls), sizeCls), _defineProperty$1(_classNames, "".concat(prefixCls, "-icon-only"), !children && children !== 0 && !!iconType), _defineProperty$1(_classNames, "".concat(prefixCls, "-background-ghost"), ghost && !isUnborderedButtonType(type)), _defineProperty$1(_classNames, "".concat(prefixCls, "-loading"), innerLoading), _defineProperty$1(_classNames, "".concat(prefixCls, "-two-chinese-chars"), hasTwoCNChar && autoInsertSpace), _defineProperty$1(_classNames, "".concat(prefixCls, "-block"), block), _defineProperty$1(_classNames, "".concat(prefixCls, "-dangerous"), !!danger), _defineProperty$1(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _classNames), className);
+  var classes = classnames(prefixCls, (_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-").concat(type), type), _defineProperty(_classNames, "".concat(prefixCls, "-").concat(shape), shape !== 'default' && shape), _defineProperty(_classNames, "".concat(prefixCls, "-").concat(sizeCls), sizeCls), _defineProperty(_classNames, "".concat(prefixCls, "-icon-only"), !children && children !== 0 && !!iconType), _defineProperty(_classNames, "".concat(prefixCls, "-background-ghost"), ghost && !isUnborderedButtonType(type)), _defineProperty(_classNames, "".concat(prefixCls, "-loading"), innerLoading), _defineProperty(_classNames, "".concat(prefixCls, "-two-chinese-chars"), hasTwoCNChar && autoInsertSpace), _defineProperty(_classNames, "".concat(prefixCls, "-block"), block), _defineProperty(_classNames, "".concat(prefixCls, "-dangerous"), !!danger), _defineProperty(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _classNames), className);
   var iconNode = icon && !innerLoading ? icon : /*#__PURE__*/React__namespace.createElement(LoadingIcon$1, {
     existIcon: !!icon,
     prefixCls: prefixCls,
@@ -9255,7 +9255,7 @@ var shallowequal = function shallowEqual(objA, objB, compare, compareContext) {
 function getInputClassName(prefixCls, bordered, size, disabled, direction) {
   var _classNames;
 
-  return classnames(prefixCls, (_classNames = {}, _defineProperty$1(_classNames, "".concat(prefixCls, "-sm"), size === 'small'), _defineProperty$1(_classNames, "".concat(prefixCls, "-lg"), size === 'large'), _defineProperty$1(_classNames, "".concat(prefixCls, "-disabled"), disabled), _defineProperty$1(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _defineProperty$1(_classNames, "".concat(prefixCls, "-borderless"), !bordered), _classNames));
+  return classnames(prefixCls, (_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-sm"), size === 'small'), _defineProperty(_classNames, "".concat(prefixCls, "-lg"), size === 'large'), _defineProperty(_classNames, "".concat(prefixCls, "-disabled"), disabled), _defineProperty(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _defineProperty(_classNames, "".concat(prefixCls, "-borderless"), !bordered), _classNames));
 }
 function hasPrefixSuffix(props) {
   return !!(props.prefix || props.suffix || props.allowClear);
@@ -9320,7 +9320,7 @@ var ClearableLabeledInput = /*#__PURE__*/function (_React$Component) {
         onMouseDown: function onMouseDown(e) {
           return e.preventDefault();
         },
-        className: classnames((_classNames = {}, _defineProperty$1(_classNames, "".concat(className, "-hidden"), !needClear), _defineProperty$1(_classNames, "".concat(className, "-has-suffix"), !!suffix), _classNames), className),
+        className: classnames((_classNames = {}, _defineProperty(_classNames, "".concat(className, "-hidden"), !needClear), _defineProperty(_classNames, "".concat(className, "-has-suffix"), !!suffix), _classNames), className),
         role: "button"
       });
     }
@@ -9368,7 +9368,7 @@ var ClearableLabeledInput = /*#__PURE__*/function (_React$Component) {
       var prefixNode = prefix ? /*#__PURE__*/React__namespace.createElement("span", {
         className: "".concat(prefixCls, "-prefix")
       }, prefix) : null;
-      var affixWrapperCls = classnames("".concat(prefixCls, "-affix-wrapper"), (_classNames2 = {}, _defineProperty$1(_classNames2, "".concat(prefixCls, "-affix-wrapper-focused"), focused), _defineProperty$1(_classNames2, "".concat(prefixCls, "-affix-wrapper-disabled"), disabled), _defineProperty$1(_classNames2, "".concat(prefixCls, "-affix-wrapper-sm"), size === 'small'), _defineProperty$1(_classNames2, "".concat(prefixCls, "-affix-wrapper-lg"), size === 'large'), _defineProperty$1(_classNames2, "".concat(prefixCls, "-affix-wrapper-input-with-clear-btn"), suffix && allowClear && value), _defineProperty$1(_classNames2, "".concat(prefixCls, "-affix-wrapper-rtl"), direction === 'rtl'), _defineProperty$1(_classNames2, "".concat(prefixCls, "-affix-wrapper-readonly"), readOnly), _defineProperty$1(_classNames2, "".concat(prefixCls, "-affix-wrapper-borderless"), !bordered), _defineProperty$1(_classNames2, "".concat(className), !hasAddon(this.props) && className), _classNames2));
+      var affixWrapperCls = classnames("".concat(prefixCls, "-affix-wrapper"), (_classNames2 = {}, _defineProperty(_classNames2, "".concat(prefixCls, "-affix-wrapper-focused"), focused), _defineProperty(_classNames2, "".concat(prefixCls, "-affix-wrapper-disabled"), disabled), _defineProperty(_classNames2, "".concat(prefixCls, "-affix-wrapper-sm"), size === 'small'), _defineProperty(_classNames2, "".concat(prefixCls, "-affix-wrapper-lg"), size === 'large'), _defineProperty(_classNames2, "".concat(prefixCls, "-affix-wrapper-input-with-clear-btn"), suffix && allowClear && value), _defineProperty(_classNames2, "".concat(prefixCls, "-affix-wrapper-rtl"), direction === 'rtl'), _defineProperty(_classNames2, "".concat(prefixCls, "-affix-wrapper-readonly"), readOnly), _defineProperty(_classNames2, "".concat(prefixCls, "-affix-wrapper-borderless"), !bordered), _defineProperty(_classNames2, "".concat(className), !hasAddon(this.props) && className), _classNames2));
       return /*#__PURE__*/React__namespace.createElement("span", {
         ref: this.containerRef,
         className: affixWrapperCls,
@@ -9405,8 +9405,8 @@ var ClearableLabeledInput = /*#__PURE__*/function (_React$Component) {
       var addonAfterNode = addonAfter ? /*#__PURE__*/React__namespace.createElement("span", {
         className: addonClassName
       }, addonAfter) : null;
-      var mergedWrapperClassName = classnames("".concat(prefixCls, "-wrapper"), wrapperClassName, _defineProperty$1({}, "".concat(wrapperClassName, "-rtl"), direction === 'rtl'));
-      var mergedGroupClassName = classnames("".concat(prefixCls, "-group-wrapper"), (_classNames4 = {}, _defineProperty$1(_classNames4, "".concat(prefixCls, "-group-wrapper-sm"), size === 'small'), _defineProperty$1(_classNames4, "".concat(prefixCls, "-group-wrapper-lg"), size === 'large'), _defineProperty$1(_classNames4, "".concat(prefixCls, "-group-wrapper-rtl"), direction === 'rtl'), _classNames4), className); // Need another wrapper for changing display:table to display:inline-block
+      var mergedWrapperClassName = classnames("".concat(prefixCls, "-wrapper"), wrapperClassName, _defineProperty({}, "".concat(wrapperClassName, "-rtl"), direction === 'rtl'));
+      var mergedGroupClassName = classnames("".concat(prefixCls, "-group-wrapper"), (_classNames4 = {}, _defineProperty(_classNames4, "".concat(prefixCls, "-group-wrapper-sm"), size === 'small'), _defineProperty(_classNames4, "".concat(prefixCls, "-group-wrapper-lg"), size === 'large'), _defineProperty(_classNames4, "".concat(prefixCls, "-group-wrapper-rtl"), direction === 'rtl'), _classNames4), className); // Need another wrapper for changing display:table to display:inline-block
       // and put style prop in wrapper
 
       return /*#__PURE__*/React__namespace.createElement("span", {
@@ -9437,7 +9437,7 @@ var ClearableLabeledInput = /*#__PURE__*/function (_React$Component) {
         });
       }
 
-      var affixWrapperCls = classnames("".concat(prefixCls, "-affix-wrapper"), "".concat(prefixCls, "-affix-wrapper-textarea-with-clear-btn"), (_classNames5 = {}, _defineProperty$1(_classNames5, "".concat(prefixCls, "-affix-wrapper-rtl"), direction === 'rtl'), _defineProperty$1(_classNames5, "".concat(prefixCls, "-affix-wrapper-borderless"), !bordered), _defineProperty$1(_classNames5, "".concat(className), !hasAddon(this.props) && className), _classNames5));
+      var affixWrapperCls = classnames("".concat(prefixCls, "-affix-wrapper"), "".concat(prefixCls, "-affix-wrapper-textarea-with-clear-btn"), (_classNames5 = {}, _defineProperty(_classNames5, "".concat(prefixCls, "-affix-wrapper-rtl"), direction === 'rtl'), _defineProperty(_classNames5, "".concat(prefixCls, "-affix-wrapper-borderless"), !bordered), _defineProperty(_classNames5, "".concat(className), !hasAddon(this.props) && className), _classNames5));
       return /*#__PURE__*/React__namespace.createElement("span", {
         className: affixWrapperCls,
         style: style
@@ -9623,7 +9623,7 @@ var Input$1 = /*#__PURE__*/function (_React$Component) {
         onFocus: _this.onFocus,
         onBlur: _this.onBlur,
         onKeyDown: _this.handleKeyDown,
-        className: classnames(getInputClassName(prefixCls, bordered, customizeSize || size, disabled, _this.direction), _defineProperty$1({}, className, className && !addonBefore && !addonAfter)),
+        className: classnames(getInputClassName(prefixCls, bordered, customizeSize || size, disabled, _this.direction), _defineProperty({}, className, className && !addonBefore && !addonAfter)),
         ref: _this.saveInput,
         size: htmlSize
       }));
@@ -9680,7 +9680,7 @@ var Input$1 = /*#__PURE__*/function (_React$Component) {
         }
 
         return /*#__PURE__*/React__namespace.createElement(React__namespace.Fragment, null, !!showCount && /*#__PURE__*/React__namespace.createElement("span", {
-          className: classnames("".concat(prefixCls, "-show-count-suffix"), _defineProperty$1({}, "".concat(prefixCls, "-show-count-has-suffix"), !!suffix))
+          className: classnames("".concat(prefixCls, "-show-count-suffix"), _defineProperty({}, "".concat(prefixCls, "-show-count-has-suffix"), !!suffix))
         }, dataCount), suffix);
       }
 
@@ -9827,7 +9827,7 @@ var Group = function Group(props) {
         _props$className = props.className,
         className = _props$className === void 0 ? '' : _props$className;
     var prefixCls = getPrefixCls('input-group', customizePrefixCls);
-    var cls = classnames(prefixCls, (_classNames = {}, _defineProperty$1(_classNames, "".concat(prefixCls, "-lg"), props.size === 'large'), _defineProperty$1(_classNames, "".concat(prefixCls, "-sm"), props.size === 'small'), _defineProperty$1(_classNames, "".concat(prefixCls, "-compact"), props.compact), _defineProperty$1(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _classNames), className);
+    var cls = classnames(prefixCls, (_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-lg"), props.size === 'large'), _defineProperty(_classNames, "".concat(prefixCls, "-sm"), props.size === 'small'), _defineProperty(_classNames, "".concat(prefixCls, "-compact"), props.compact), _defineProperty(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _classNames), className);
     return /*#__PURE__*/React__namespace.createElement("span", {
       className: cls,
       style: props.style,
@@ -9946,7 +9946,7 @@ var Search = /*#__PURE__*/React__namespace.forwardRef(function (props, ref) {
     })];
   }
 
-  var cls = classnames(prefixCls, (_classNames = {}, _defineProperty$1(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _defineProperty$1(_classNames, "".concat(prefixCls, "-").concat(size), !!size), _defineProperty$1(_classNames, "".concat(prefixCls, "-with-button"), !!enterButton), _classNames), className);
+  var cls = classnames(prefixCls, (_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-rtl"), direction === 'rtl'), _defineProperty(_classNames, "".concat(prefixCls, "-").concat(size), !!size), _defineProperty(_classNames, "".concat(prefixCls, "-with-button"), !!enterButton), _classNames), className);
   return /*#__PURE__*/React__namespace.createElement(Input$2, _extends$2({
     ref: composeRef(inputRef, ref),
     onPressEnter: onSearch
@@ -10177,7 +10177,7 @@ var ResizableTextArea = /*#__PURE__*/function (_React$Component) {
           textareaStyles = _this$state.textareaStyles,
           resizeStatus = _this$state.resizeStatus;
       var otherProps = omit(_this.props, ['prefixCls', 'onPressEnter', 'autoSize', 'defaultValue', 'onResize']);
-      var cls = classnames(prefixCls, className, _defineProperty$1({}, "".concat(prefixCls, "-disabled"), disabled)); // Fix https://github.com/ant-design/ant-design/issues/6776
+      var cls = classnames(prefixCls, className, _defineProperty({}, "".concat(prefixCls, "-disabled"), disabled)); // Fix https://github.com/ant-design/ant-design/issues/6776
       // Make sure it could be reset when using form.getFieldDecorator
 
       if ('value' in otherProps) {
@@ -10470,7 +10470,7 @@ var TextArea = /*#__PURE__*/React__namespace.forwardRef(function (_a, ref) {
     };
   });
   var textArea = /*#__PURE__*/React__namespace.createElement(TextArea$2, _extends$2({}, omit(props, ['allowClear']), {
-    className: classnames((_classNames = {}, _defineProperty$1(_classNames, "".concat(prefixCls, "-borderless"), !bordered), _defineProperty$1(_classNames, className, className && !showCount), _defineProperty$1(_classNames, "".concat(prefixCls, "-sm"), size === 'small' || customizeSize === 'small'), _defineProperty$1(_classNames, "".concat(prefixCls, "-lg"), size === 'large' || customizeSize === 'large'), _classNames)),
+    className: classnames((_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-borderless"), !bordered), _defineProperty(_classNames, className, className && !showCount), _defineProperty(_classNames, "".concat(prefixCls, "-sm"), size === 'small' || customizeSize === 'small'), _defineProperty(_classNames, "".concat(prefixCls, "-lg"), size === 'large' || customizeSize === 'large'), _classNames)),
     style: showCount ? undefined : style,
     prefixCls: prefixCls,
     onCompositionStart: onInternalCompositionStart,
@@ -10513,7 +10513,7 @@ var TextArea = /*#__PURE__*/React__namespace.forwardRef(function (_a, ref) {
     }
 
     return /*#__PURE__*/React__namespace.createElement("div", {
-      className: classnames("".concat(prefixCls, "-textarea"), _defineProperty$1({}, "".concat(prefixCls, "-textarea-rtl"), direction === 'rtl'), "".concat(prefixCls, "-textarea-show-count"), className),
+      className: classnames("".concat(prefixCls, "-textarea"), _defineProperty({}, "".concat(prefixCls, "-textarea-rtl"), direction === 'rtl'), "".concat(prefixCls, "-textarea-show-count"), className),
       style: style,
       "data-count": dataCount
     }, textareaNode);
@@ -10593,11 +10593,11 @@ var Password = /*#__PURE__*/React__namespace.forwardRef(function (props, ref) {
     } : _props$iconRender;
     var iconTrigger = ActionMap[action] || '';
     var icon = iconRender(visible);
-    var iconProps = (_iconProps = {}, _defineProperty$1(_iconProps, iconTrigger, onVisibleChange), _defineProperty$1(_iconProps, "className", "".concat(prefixCls, "-icon")), _defineProperty$1(_iconProps, "key", 'passwordIcon'), _defineProperty$1(_iconProps, "onMouseDown", function onMouseDown(e) {
+    var iconProps = (_iconProps = {}, _defineProperty(_iconProps, iconTrigger, onVisibleChange), _defineProperty(_iconProps, "className", "".concat(prefixCls, "-icon")), _defineProperty(_iconProps, "key", 'passwordIcon'), _defineProperty(_iconProps, "onMouseDown", function onMouseDown(e) {
       // Prevent focused state lost
       // https://github.com/ant-design/ant-design/issues/15173
       e.preventDefault();
-    }), _defineProperty$1(_iconProps, "onMouseUp", function onMouseUp(e) {
+    }), _defineProperty(_iconProps, "onMouseUp", function onMouseUp(e) {
       // Prevent caret position change
       // https://github.com/ant-design/ant-design/issues/23524
       e.preventDefault();
@@ -10618,7 +10618,7 @@ var Password = /*#__PURE__*/React__namespace.forwardRef(function (props, ref) {
     var inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
     var prefixCls = getPrefixCls('input-password', customizePrefixCls);
     var suffixIcon = visibilityToggle && getIcon(prefixCls);
-    var inputClassName = classnames(prefixCls, className, _defineProperty$1({}, "".concat(prefixCls, "-").concat(size), !!size));
+    var inputClassName = classnames(prefixCls, className, _defineProperty({}, "".concat(prefixCls, "-").concat(size), !!size));
 
     var omittedProps = _extends$2(_extends$2({}, omit(restProps, ['suffix', 'iconRender'])), {
       type: visible ? 'text' : 'password',
@@ -10695,27 +10695,6 @@ module.exports = _extends, module.exports.__esModule = true, module.exports["def
 });
 
 var _extends = unwrapExports(_extends_1);
-
-var defineProperty = createCommonjsModule(function (module) {
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-
-var _defineProperty = unwrapExports(defineProperty);
 
 var objectWithoutPropertiesLoose = createCommonjsModule(function (module) {
 function _objectWithoutPropertiesLoose(source, excluded) {
@@ -10863,7 +10842,7 @@ var _slicedToArray = unwrapExports(slicedToArray);
 var StyledFloatWrapper = styled__default["default"].div.withConfig({
   displayName: "floating-label__StyledFloatWrapper",
   componentId: "sc-1p0x6j5-0"
-})(["position:relative;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;.required{opacity:0.5;}.placeholder{display:flex;position:absolute;opacity:0.5;top:20px;left:12px;}.label{font-size:15px;position:absolute;pointer-events:none;left:12px;top:12px;transition:0.2s ease all;z-index:2;}.label-float{top:6px;font-size:11px;}.disabled{opacity:0.6;}"]);
+})(["display:flex;flex:1;position:relative;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;.required{color:#ff0000;opacity:0.5;}.placeholder{display:flex;position:absolute;opacity:0.5;top:20px;left:12px;}.label{font-size:15px;position:absolute;pointer-events:none;left:12px;top:12px;transition:0.2s ease all;z-index:2;}.label-float{top:6px;font-size:11px;}.disabled{opacity:0.6;}"]);
 
 var FloatLabel = function FloatLabel(_ref) {
   var children = _ref.children,
@@ -10884,12 +10863,8 @@ var FloatLabel = function FloatLabel(_ref) {
   var isFocused = focus || value && value.length !== 0;
   var labelClass = isFocused ? 'label label-float ' : 'label ';
   var wrapperClass = 'float-label noselect ';
-  if (className) wrapperClass = wrapperClass.concat(className);
-  console.log("FloatLabel: ", {
-    isFocused: isFocused,
-    focus: focus,
-    value: value
-  });
+  if (className) wrapperClass = wrapperClass.concat(className); // console.log('FloatLabel: ', { isFocused, focus, value });
+
   return /*#__PURE__*/React__default["default"].createElement(StyledFloatWrapper, {
     className: wrapperClass,
     onBlur: function onBlur() {
@@ -10911,14 +10886,10 @@ var FloatLabel = function FloatLabel(_ref) {
 };
 
 var _excluded = ["required", "label", "placeholder", "value"];
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var StyledInput = styled__default["default"](Input$2).withConfig({
   displayName: "Input__StyledInput",
   componentId: "sc-wrd3xz-0"
-})(["height:50px;&&&{padding-top:16px !important;}"]);
+})(["height:50px;&&&{padding-top:16px !important;box-shadow:none !important;}"]);
 var Input = /*#__PURE__*/React__default["default"].forwardRef(function Input(_ref, ref) {
   var required = _ref.required,
       label = _ref.label,
@@ -10926,12 +10897,6 @@ var Input = /*#__PURE__*/React__default["default"].forwardRef(function Input(_re
       value = _ref.value,
       other = _objectWithoutProperties(_ref, _excluded);
 
-  console.log("input: ", _objectSpread({
-    required: required,
-    label: label,
-    placeholder: placeholder,
-    value: value
-  }, other));
   return /*#__PURE__*/React__default["default"].createElement(FloatLabel, {
     required: required,
     label: label,
@@ -10940,15 +10905,7 @@ var Input = /*#__PURE__*/React__default["default"].forwardRef(function Input(_re
   }, /*#__PURE__*/React__default["default"].createElement(StyledInput, _extends({
     value: value
   }, other)));
-}); // export const Input = React.forwardRef(function Input({required, label, placeholder, ...other}, ref) {
-// 	const [value, setValue] = useState("");
-// 	console.log("input: ", {required, label, placeholder, value, ...other, ref})
-// 	return (
-// 		<FloatLabel required={required} label={label} placeholder={placeholder} value={value}>
-// 			<StyledInput value={value} onChange={(e) => setValue(e.target.value)} {...other} />
-// 		</FloatLabel>
-// 	);
-// });
+});
 
 exports.Button = Button;
 exports.Button3 = Button3;
