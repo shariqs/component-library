@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 export const StyledFloatWrapper = styled.div`
+	display: flex;
+	flex: 1;
 	position: relative;
 	overflow: hidden;
 	white-space: nowrap;
@@ -9,7 +11,7 @@ export const StyledFloatWrapper = styled.div`
 
 	.required {
 		/* color: $primary-color; */
-		color: #FF0000;
+		color: #ff0000;
 		opacity: 0.5;
 	}
 
@@ -51,7 +53,7 @@ const FloatLabel = ({ children, label, value, placeholder, required, className, 
 	let wrapperClass = 'float-label noselect ';
 	if (className) wrapperClass = wrapperClass.concat(className);
 
-	console.log("FloatLabel: ", {isFocused, focus, value})
+	// console.log('FloatLabel: ', { isFocused, focus, value });
 
 	return (
 		<StyledFloatWrapper className={wrapperClass} onBlur={() => setFocus(false)} onFocus={() => setFocus(true)} style={style}>
