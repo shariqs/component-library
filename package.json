@@ -17,9 +17,8 @@
   "scripts": {
     "start": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public -o ./storybook",
-    "build": "rm -rf dist && npm run build:prod",
-    "build-dev": "rollup -c",
-    "build-prod": "rollup -c",
+    "build-prod": "rm -rf dist && npm run build:prod",
+    "build": "rollup -c",
     "prettier": "prettier --write \"src/**/*.+(js|jsx|json|css|md)\"",
     "linter": "eslint --fix \"src/**/*.+(js|jsx|css)\"",
     "lint": "npm run linter && npm run prettier"

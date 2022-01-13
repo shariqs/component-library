@@ -186,10 +186,6 @@ function _createSuper(Derived) {
   };
 }
 
-function unwrapExports (x) {
-	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-}
-
 function createCommonjsModule(fn, module) {
 	return module = { exports: {} }, fn(module, module.exports), module.exports;
 }
@@ -403,7 +399,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   return target;
 }
 
-function _objectWithoutProperties$1(source, excluded) {
+function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
   var target = _objectWithoutPropertiesLoose(source, excluded);
   var key, i;
@@ -3159,7 +3155,7 @@ function _finishOnFirstFailed() {
   return _finishOnFirstFailed.apply(this, arguments);
 }
 
-var _excluded$5 = ["name"];
+var _excluded$4 = ["name"];
 var EMPTY_ERRORS = [];
 
 function requireUpdate(shouldUpdate, prev, next, prevValue, nextValue, info) {
@@ -3769,7 +3765,7 @@ Field.defaultProps = {
 
 function WrapperField(_ref5) {
   var name = _ref5.name,
-      restProps = _objectWithoutProperties$1(_ref5, _excluded$5);
+      restProps = _objectWithoutProperties(_ref5, _excluded$4);
 
   var fieldContext = React__namespace.useContext(Context);
   var namePath = name !== undefined ? getNamePath(name) : undefined;
@@ -4103,7 +4099,7 @@ var NameMap = /*#__PURE__*/function () {
   return NameMap;
 }();
 
-var _excluded$4 = ["name", "errors"];
+var _excluded$3 = ["name", "errors"];
 var FormStore = /*#__PURE__*/_createClass(function FormStore(forceRootUpdate) {
   var _this = this;
 
@@ -4539,7 +4535,7 @@ var FormStore = /*#__PURE__*/_createClass(function FormStore(forceRootUpdate) {
     fields.forEach(function (fieldData) {
       var name = fieldData.name;
           fieldData.errors;
-          var data = _objectWithoutProperties$1(fieldData, _excluded$4);
+          var data = _objectWithoutProperties(fieldData, _excluded$3);
 
       var namePath = getNamePath(name); // Value
 
@@ -5032,7 +5028,7 @@ var FormProvider = function FormProvider(_ref) {
   }, children);
 };
 
-var _excluded$3 = ["name", "initialValues", "fields", "form", "preserve", "children", "component", "validateMessages", "validateTrigger", "onValuesChange", "onFieldsChange", "onFinish", "onFinishFailed"];
+var _excluded$2 = ["name", "initialValues", "fields", "form", "preserve", "children", "component", "validateMessages", "validateTrigger", "onValuesChange", "onFieldsChange", "onFinish", "onFinishFailed"];
 
 var Form = function Form(_ref, ref) {
   var name = _ref.name,
@@ -5050,7 +5046,7 @@ var Form = function Form(_ref, ref) {
       _onFieldsChange = _ref.onFieldsChange,
       _onFinish = _ref.onFinish,
       onFinishFailed = _ref.onFinishFailed,
-      restProps = _objectWithoutProperties$1(_ref, _excluded$3);
+      restProps = _objectWithoutProperties(_ref, _excluded$2);
 
   var formContext = React__namespace.useContext(FormContext); // We customize handle event since Context will makes all the consumer re-render:
   // https://reactjs.org/docs/context.html#contextprovider
@@ -7217,7 +7213,7 @@ var useInsertStyles = function useInsertStyles() {
   }, []);
 };
 
-var _excluded$2 = ["icon", "className", "onClick", "style", "primaryColor", "secondaryColor"];
+var _excluded$1 = ["icon", "className", "onClick", "style", "primaryColor", "secondaryColor"];
 var twoToneColorPalette = {
   primaryColor: '#333',
   secondaryColor: '#E6E6E6',
@@ -7243,7 +7239,7 @@ var IconBase = function IconBase(props) {
       style = props.style,
       primaryColor = props.primaryColor,
       secondaryColor = props.secondaryColor,
-      restProps = _objectWithoutProperties$1(props, _excluded$2);
+      restProps = _objectWithoutProperties(props, _excluded$1);
 
   var colors = twoToneColorPalette;
 
@@ -7307,7 +7303,7 @@ function getTwoToneColor() {
   return [colors.primaryColor, colors.secondaryColor];
 }
 
-var _excluded$1 = ["className", "icon", "spin", "rotate", "tabIndex", "onClick", "twoToneColor"];
+var _excluded = ["className", "icon", "spin", "rotate", "tabIndex", "onClick", "twoToneColor"];
 // should move it to antd main repo?
 
 setTwoToneColor('#1890ff');
@@ -7321,7 +7317,7 @@ var Icon = /*#__PURE__*/React__namespace.forwardRef(function (props, ref) {
       tabIndex = props.tabIndex,
       onClick = props.onClick,
       twoToneColor = props.twoToneColor,
-      restProps = _objectWithoutProperties$1(props, _excluded$1);
+      restProps = _objectWithoutProperties(props, _excluded);
 
   var _React$useContext = React__namespace.useContext(IconContext$1),
       _React$useContext$pre = _React$useContext.prefixCls,
@@ -7994,71 +7990,15 @@ var Button = /*#__PURE__*/React__default["default"].forwardRef(function Button(p
   return /*#__PURE__*/React__default["default"].createElement(StyledButton$1, props, props.children);
 });
 
-var objectWithoutPropertiesLoose = createCommonjsModule(function (module) {
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-
-  return target;
-}
-
-module.exports = _objectWithoutPropertiesLoose, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-
-unwrapExports(objectWithoutPropertiesLoose);
-
-var objectWithoutProperties = createCommonjsModule(function (module) {
-function _objectWithoutProperties(source, excluded) {
-  if (source == null) return {};
-  var target = objectWithoutPropertiesLoose(source, excluded);
-  var key, i;
-
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
-    }
-  }
-
-  return target;
-}
-
-module.exports = _objectWithoutProperties, module.exports.__esModule = true, module.exports["default"] = module.exports;
-});
-
-var _objectWithoutProperties = unwrapExports(objectWithoutProperties);
-
-var _excluded = ["primary", "backgroundColor", "size", "label", "onClick"];
+/* eslint-disable no-nested-ternary */
 var StyledButton = styled__default["default"].button.withConfig({
   displayName: "Button3__StyledButton",
   componentId: "sc-gjs2up-0"
 })(["width:100px;height:100px;font-size:1em;margin:1em;padding:0.25em 1em;border:2px solid palevioletred;border-radius:3px;background-color:", ";"], function (props) {
-  return props.backgroundColor || "unset";
+  return props.backgroundColor || 'unset';
 });
-var Button3 = function Button3(_ref) {
-  _ref.primary;
-      var backgroundColor = _ref.backgroundColor;
-      _ref.size;
-      var label = _ref.label,
-      onClick = _ref.onClick;
-      _objectWithoutProperties(_ref, _excluded);
-
-  return /*#__PURE__*/React__default["default"].createElement(StyledButton, {
-    onClick: onClick,
-    backgroundColor: backgroundColor
-  }, label);
+var Button3 = function Button3(props) {
+  return /*#__PURE__*/React__default["default"].createElement(StyledButton, props, props.children);
 };
 
 exports.Button = Button;
