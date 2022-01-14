@@ -21105,7 +21105,7 @@ Input$2.Password = Password$1;
 var StyledButton$1 = styled__default["default"](Button$2).withConfig({
   displayName: "Button__StyledButton",
   componentId: "sc-125wamt-0"
-})([""]);
+})(["span span{margin-left:10px;}"]);
 var Button = /*#__PURE__*/React__default["default"].forwardRef(function Button(props, ref) {
   return /*#__PURE__*/React__default["default"].createElement(StyledButton$1, props, props.children);
 });

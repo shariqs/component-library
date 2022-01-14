@@ -23,7 +23,7 @@ With_Icon.args = {
 	children: (
 		<>
 			<FontAwesomeIcon icon={faPlus} />
-			Add Item
+			<span>Add Item</span>
 		</>
 	)
 };
@@ -44,7 +44,7 @@ Disabled.args = {
 	children: (
 		<>
 			<FontAwesomeIcon icon={faPlus} />
-			Add Item
+			<span>Add Item</span>
 		</>
 	)
 };
@@ -55,7 +55,7 @@ Loading.args = {
 	children: (
 		<>
 			<FontAwesomeIcon icon={faPlus} />
-			Adding Item
+			<span>Adding Item</span>
 		</>
 	)
 };
