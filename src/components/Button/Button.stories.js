@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Button } from './Button';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -28,6 +28,16 @@ With_Icon.args = {
 	)
 };
 
+export const Icon_Only = Template.bind({});
+Icon_Only.args = {
+	children: (
+		<>
+			<FontAwesomeIcon icon={faBars} />
+		</>
+	)
+};
+
+
 export const Disabled = Template.bind({});
 Disabled.args = {
 	disabled: true,
@@ -35,6 +45,17 @@ Disabled.args = {
 		<>
 			<FontAwesomeIcon icon={faPlus} />
 			Add Item
+		</>
+	)
+};
+
+export const Loading = Template.bind({});
+Loading.args = {
+	isLoading: true,
+	children: (
+		<>
+			<FontAwesomeIcon icon={faPlus} />
+			Adding Item
 		</>
 	)
 };

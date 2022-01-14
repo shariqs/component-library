@@ -21074,11 +21074,10 @@ Input$2.Search = Search$1;
 Input$2.TextArea = TextArea$1;
 Input$2.Password = Password$1;
 
-/* eslint-disable no-nested-ternary */
 var StyledButton$1 = styled(Button$2).withConfig({
   displayName: "Button__StyledButton",
   componentId: "sc-125wamt-0"
-})(["svg{margin-right:10px;}"]);
+})([""]);
 var Button = /*#__PURE__*/React__default.forwardRef(function Button(props, ref) {
   return /*#__PURE__*/React__default.createElement(StyledButton$1, props, props.children);
 });
